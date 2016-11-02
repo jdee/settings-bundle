@@ -1,0 +1,11 @@
+*.gem
+Gemfile.lock
+*.swp
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+fastlane/README.md
+fastlane/report.xml
