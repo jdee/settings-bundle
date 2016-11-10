@@ -1,5 +1,5 @@
 PATH
-  remote: ../../fastlane-plugin-settings_bundle
+  remote: ../fastlane-plugin-settings_bundle
   specs:
     fastlane-plugin-settings_bundle (0.1.0)
       plist
