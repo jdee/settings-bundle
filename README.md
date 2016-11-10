@@ -2,5 +2,5 @@
 
 Work in progress.
 
-See [the plugin](fastlane-plugin-settings_bundle/README.md) for
-documentation.
+See [the plugin](fastlane-plugin-settings_bundle) for
+documentation. A sample project is in [SettingsBundleExample].
