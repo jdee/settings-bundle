@@ -7,7 +7,7 @@ module Fastlane
         def formatted_version_from_info_plist(project, configuration)
           # find the first non-test, non-extension target
           # TODO: Make this a :target parameter
-          target = project.targets.find { |t| !t.test_target_type? && !t.extension_target_type }
+          target = project.targets.find { |t| !t.test_target_type? && !t.extension_target_type? }
 
           # find the Info.plist paths for all configurations
           info_plist_paths = target.resolved_build_setting "INFOPLIST_FILE"
@@ -29,7 +29,7 @@ module Fastlane
         end
 
         def update_root_plist(project, file, key, version)
-          settings_bundle_path = project.files.find({ |f| f.path =~ /Settings.bundle/ }).path
+          settings_bundle_path = project.files.find{ |f| f.path =~ /Settings.bundle/ }.path
           plist_path = File.join settings_bundle_path, file
 
           # raises
