@@ -1,0 +1,6 @@
+fastlane_version "1.106.2"
+
+default_platform :ios
+
+lane :update
+end
