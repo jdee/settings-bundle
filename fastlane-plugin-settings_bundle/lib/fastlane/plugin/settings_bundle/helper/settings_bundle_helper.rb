@@ -25,6 +25,7 @@ module Fastlane
           current_build_number = info_plist["CFBundleVersion"]
 
           # formatted string
+          # TODO: Allow customization
           "#{current_marketing_version} (#{current_build_number})"
         end
 
