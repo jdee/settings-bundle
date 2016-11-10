@@ -2,5 +2,9 @@ fastlane_version "1.106.2"
 
 default_platform :ios
 
-lane :update
+lane :update do
+  xcodeproj = "SettingsBundleExample.xcodeproj"
+
+  increment_version_number xcodeproj: xcodeproj
+  update_settings_bundle xcodeproj: xcodeproj, key: "CurrentAppVersion"
 end
