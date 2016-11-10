@@ -15,7 +15,7 @@ module Fastlane
 
         current_app_version = helper.formatted_version_from_info_plist project, configuration
 
-        helper.update_root_plist project, file, key, current_app_version
+        helper.update_settings_plist_title_setting project, file, key, current_app_version
       rescue => e
         UI.user_error! e.message
       end
