@@ -60,6 +60,24 @@ module Fastlane
         ]
       end
 
+      def self.example_code
+        [
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              key: "CurrentAppVersion"
+            )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              file: "About.plist",
+              key: "CurrentAppVersion"
+            )
+          EOF
+        ]
+      end
+
       def self.is_supported?(platform)
         platform == :ios
       end

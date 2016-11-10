@@ -14,13 +14,53 @@ fastlane add_plugin settings_bundle
 
 Fastlane plugin to update static settings in an iOS settings bundle
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+### update_settings_bundle
+
+This action updates a specified NSUserDefaults key in the project's
+`Settings.bundle` to the current app version, including the marketing
+version and the build number. Use it after `increment_build_number` or
+`increment_version_number`.
+
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  key: "CurrentAppVersion"
+)
+```
+
+This updates the key named `CurrentAppVersion` in the `Root.plist` in the
+`Settings.bundle`.
+
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  file: "About.plist",
+  key: "CurrentAppVersion"
+)
+```
+
+The `file` argument specifies a file other than `Root.plist` in the
+`Settings.bundle`. If you have multiple projects, keys or files,
+run the action multiple times.
 
 ## Example
 
-Check out the [example `Fastfile`](fastlane/Fastfile) to see how to use this plugin. Try it by cloning the repo, running `fastlane install_plugins` and `bundle exec fastlane test`.
+See the SettingsBundleExample subdirectory for a sample project that
+makes use of this action.
 
-**Note to author:** Please set up a sample project to make it easy for users to explore what your plugin does. Provide everything that is necessary to try out the plugin in this project (including a sample Xcode/Android project if necessary)
+First build and run the sample project. It should show you the current
+version and build number: 1.0.0 (1).
+
+```bash
+cd SettingsBundleExample
+bundle install
+cd fastlane
+bundle exec fastlane update
+```
+
+Now run the sample app again. It should display 1.0.0 (2). Visit the
+Settings app under the settings for the app to see the update to the
+settings bundle.
 
 ## Run tests for this plugin
 
