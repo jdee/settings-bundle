@@ -4,7 +4,7 @@
 
 # Work in progress
 
-This plugin is currently unfinished and unreleased. See #1 for general discussion.
+This plugin is currently unfinished and unreleased. See [this issue](https://github.com/jdee/settings-bundle/issues/1) for general discussion.
 
 ## Getting Started
 
