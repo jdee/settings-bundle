@@ -49,6 +49,10 @@ module Fastlane
 
           raise "Info.plist not found for configuration #{configuration}" if release_info_plist_path.nil?
 
+          project_parent = File.dirname project.path
+
+          release_info_plist_path = File.join project_parent, release_info_plist_path
+
           # try to open and parse the Info.plist (raises)
           info_plist = Plist.parse_xml release_info_plist_path
 
@@ -78,7 +82,9 @@ module Fastlane
 
           raise "Settings.bundle not found in project" if settings_bundle_path.nil?
 
-          plist_path = File.join settings_bundle_path, file
+          project_parent = File.dirname project.path
+
+          plist_path = File.join project_parent, settings_bundle_path, file
 
           # raises
           settings_plist = Plist.parse_xml plist_path

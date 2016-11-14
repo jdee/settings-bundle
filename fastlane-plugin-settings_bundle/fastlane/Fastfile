@@ -1,3 +1,0 @@
-lane :test do
-  settings_bundle
-end

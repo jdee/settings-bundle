@@ -1,1 +1,0 @@
-gem "fastlane-plugin-settings_bundle", path: "../fastlane-plugin-settings_bundle"

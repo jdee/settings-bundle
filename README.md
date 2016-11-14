@@ -1,21 +1,92 @@
-# settings_bundle plugin for Fastlane
+# settings_bundle plugin
 
-Work in progress.
+[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
 
-See [the plugin](fastlane-plugin-settings_bundle) for
-documentation.
+## Getting Started
 
-A sample project is in [SettingsBundleExample](SettingsBundleExample).
+This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-settings_bundle`, add it to your project by running:
 
-An [issue](https://github.com/jdee/settings-bundle/issues/1) is open
-for general discussion.
+```bash
+fastlane add_plugin settings_bundle
+```
 
-#### The MIT License
+## About settings_bundle
 
-Copyright (c) 2016 Jimmy Dee
+Fastlane plugin to update static settings in an iOS settings bundle
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+### update_settings_bundle
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+This action updates a specified NSUserDefaults key in the project's
+`Settings.bundle` to the current app version, including the marketing
+version and the build number. Use it after `increment_build_number` or
+`increment_version_number`.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  key: "CurrentAppVersion"
+)
+```
+
+This updates the key named `CurrentAppVersion` in the `Root.plist` in the
+`Settings.bundle`.
+
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  file: "About.plist",
+  key: "CurrentAppVersion"
+)
+```
+
+The `file` argument specifies a file other than `Root.plist` in the
+`Settings.bundle`. If you have multiple projects, keys or files,
+run the action multiple times.
+
+## Example
+
+See the SettingsBundleExample subdirectory for a sample project that
+makes use of this action.
+
+First build and run the sample project. It should show you the current
+version and build number: 1.0.0 (1).
+
+```bash
+cd SettingsBundleExample
+bundle install
+cd fastlane
+bundle exec fastlane update
+```
+
+Now run the sample app again. It should display 1.0.0 (2). Visit the
+Settings app under the settings for the app to see the update to the
+settings bundle.
+
+## Run tests for this plugin
+
+To run both the tests, and code style validation, run
+
+```
+rake
+```
+
+To automatically fix many of the styling issues, use
+```
+rubocop -a
+```
+
+## Issues and Feedback
+
+For any other issues and feedback about this plugin, please submit it to this repository.
+
+## Troubleshooting
+
+If you have trouble using plugins, check out the [Plugins Troubleshooting](https://github.com/fastlane/fastlane/blob/master/fastlane/docs/PluginsTroubleshooting.md) doc in the main `fastlane` repo.
+
+## Using `fastlane` Plugins
+
+For more information about how the `fastlane` plugin system works, check out the [Plugins documentation](https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Plugins.md).
+
+## About `fastlane`
+
+`fastlane` is the easiest way to automate beta deployments and releases for your iOS and Android apps. To learn more, check out [fastlane.tools](https://fastlane.tools).
