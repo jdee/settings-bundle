@@ -2,6 +2,10 @@
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
 
+# Work in progress
+
+This plugin is currently unfinished and unreleased. See #1 for general discussion.
+
 ## Getting Started
 
 This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-settings_bundle`, add it to your project by running:
