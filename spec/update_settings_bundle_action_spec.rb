@@ -15,5 +15,15 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
       action.run xcodeproj: "MyProject.xcodeproj", key: "CurrentAppVersion",
         configuration: "Release", file: "Root.plist"
     end
+
+    it 'logs on error' do
+      pending "where is UI?"
+
+      expect(Xcodeproj::Project).to receive(:open).and_raise "Not found"
+
+      expect(UI).to receive(:user_error!).with "Not found"
+
+      action.run
+    end
   end
 end
