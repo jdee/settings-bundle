@@ -8,13 +8,8 @@ This plugin is currently unfinished and unreleased. See [this issue](https://git
 
 ## Getting Started
 
-This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-settings_bundle`, add it to your project by ~~running~~:
-
-```bash
-~~fastlane add_plugin settings_bundle~~
-```
-
-Add the following line to your Pluginfile until the gem is published:
+This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-settings_bundle`, 
+add the following line to your Pluginfile until the gem is published:
 ```
 gem "fastlane-plugin-settings_bundle", git: "https://github.com/jdee/settings-bundle"
 ```
