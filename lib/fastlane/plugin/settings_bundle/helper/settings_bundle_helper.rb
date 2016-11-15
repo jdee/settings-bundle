@@ -78,9 +78,11 @@ module Fastlane
         # :key: A valid NSUserDefaults key in the Settings.bundle
         # :value: A new value for the key
         def update_settings_plist_title_setting(project, file, key, value)
-          settings_bundle_path = project.files.find { |f| f.path =~ /Settings.bundle/ }.path
+          settings_bundle = project.files.find { |f| f.path =~ /Settings.bundle/ }
 
-          raise "Settings.bundle not found in project" if settings_bundle_path.nil?
+          raise "Settings.bundle not found in project" if settings_bundle.nil?
+
+          settings_bundle_path = settings_bundle.path
 
           project_parent = File.dirname project.path
 
