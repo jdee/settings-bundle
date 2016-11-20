@@ -4,6 +4,8 @@ xcuserdata
 *.swp
 *.bak
 
+coverage
+
 #Pods
 *.gem
 Gemfile.lock
