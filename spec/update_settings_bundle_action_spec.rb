@@ -45,4 +45,33 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
       action.run xcodeproj: "MyProject.xcodeproj"
     end
   end
+
+  describe 'OS support' do
+    it 'is supported on iOS' do
+      expect(action.is_supported? :ios).to be true
+    end
+  end
+
+  # Satisfy simplecov
+  describe 'other methods' do
+    it 'has examples' do
+      expect(action.example_code).not_to be nil
+    end
+
+    it 'has options' do
+      expect(action.available_options).not_to be nil
+    end
+
+    it 'has details' do
+      expect(action.details).not_to be nil
+    end
+
+    it 'has authors' do
+      expect(action.authors).not_to be nil
+    end
+
+    it 'has a description' do
+      expect(action.description).not_to be nil
+    end
+  end
 end
