@@ -21,6 +21,14 @@
 describe Fastlane::Helper::SettingsBundleHelper do
   let(:helper) { Fastlane::Helper::SettingsBundleHelper }
 
+  describe 'formatted_version' do
+    it 'returns the version and build number in the specified format' do
+      formatted_version = helper.formatted_version ":version (:build)",
+        "1.0.0", "1"
+      expect(formatted_version).to eq "1.0.0 (1)"
+    end
+  end
+
   describe 'formatted_version_from_info_plist' do
     it 'returns the formatted version from the Info.plist file' do
       # project setting

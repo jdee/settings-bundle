@@ -24,6 +24,20 @@ module Fastlane
   module Helper
     class SettingsBundleHelper
       class << self
+        # Takes a format, a version number and a build number and
+        # returns a formatted version according to the specified
+        # format. :version is replaced by the version number. :build
+        # is replaced by the build number. Neither the version nor
+        # the build number is required, though omitting both from the
+        # format will result in the format being returned as the value.
+        #
+        # :format: A format containing :version, :build or both
+        # :version: The marketing version from the Info.plist
+        # :build: The build number from the Info.plist
+        def formatted_version format, version, build
+          format.gsub(/:version/, version.to_s).gsub(/:build/, build.to_s)
+        end
+
         # Takes an open Xcodeproj::Project and extracts the current
         # marketing version and build number as a formatted string.
         # The format is "#{marketing_version} (#{build_number})".
