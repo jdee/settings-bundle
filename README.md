@@ -2,7 +2,7 @@
 
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg?style=flat)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/jdee/settings-bundle/blob/master/LICENSE)
-[![Build Status](https://circleci.com/gh/jdee/settings-bundle.svg?style=flat)](https://circleci.com/gh/jdee/settings-bundle)
+[![Build Status](https://circleci.com/gh/jdee/settings-bundle.svg?style=svg)](https://circleci.com/gh/jdee/settings-bundle)
 # Work in progress
 
 This plugin is currently unfinished and unreleased. See [this issue](https://github.com/jdee/settings-bundle/issues/1) for general discussion.
