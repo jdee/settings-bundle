@@ -50,8 +50,8 @@ run the action multiple times.
 #### Key content
 
 You can also override the default content using an optional `value:`
-argument containing the symbols `:version` and `:build`. The default
-is `":version (:build)"`.
+argument optionally containing the symbols `:version` and `:build`. The
+default `value` is `":version (:build)"`.
 
 ```ruby
 update_settings_bundle(
