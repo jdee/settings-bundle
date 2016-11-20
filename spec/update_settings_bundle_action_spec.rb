@@ -48,7 +48,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
   describe 'OS support' do
     it 'is supported on iOS' do
-      expect(action.is_supported? :ios).to be true
+      expect(action.is_supported?(:ios)).to be true
     end
   end
 

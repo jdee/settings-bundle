@@ -8,7 +8,7 @@ coverage
 
 #Pods
 *.gem
-Gemfile.lock
+# Gemfile.lock
 *.swp
 
 ## Documentation cache and generated files:
