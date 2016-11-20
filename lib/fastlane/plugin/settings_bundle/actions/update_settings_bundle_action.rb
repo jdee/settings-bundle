@@ -25,7 +25,7 @@ module Fastlane
         key = params[:key]
         configuration = params[:configuration]
         file = params[:file]
-        format = params[:format]
+        value = params[:value]
 
         # try to open project file (raises)
         project = Xcodeproj::Project.open params[:xcodeproj]
@@ -35,7 +35,7 @@ module Fastlane
         current_app_version =
           helper.formatted_version_from_info_plist project,
                                                    configuration,
-                                                   format
+                                                   value
 
         helper.update_settings_plist_title_setting project, file, key,
                                                    current_app_version
@@ -73,9 +73,9 @@ module Fastlane
                                   optional: true,
                              default_value: "Release",
                                       type: String),
-          FastlaneCore::ConfigItem.new(key: :format,
-                                  env_name: "SETTINGS_BUNDLE_FORMAT",
-                               description: "Specifies how to format the version and build number",
+          FastlaneCore::ConfigItem.new(key: :value,
+                                  env_name: "SETTINGS_BUNDLE_VALUE",
+                               description: "Value to set with optional :version and :build included",
                                   optional: true,
                              default_value: ":version (:build)",
                                       type: String),

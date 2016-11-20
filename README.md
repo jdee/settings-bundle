@@ -47,28 +47,29 @@ The `file` argument specifies a file other than `Root.plist` in the
 `Settings.bundle`. If you have multiple projects, keys or files,
 run the action multiple times.
 
-#### Custom formats
+#### Key content
 
-You can also override the default format using an optional format
+You can also override the default content using an optional `value:`
 argument containing the symbols `:version` and `:build`. The default
-format is `":version (:build)"`.
+is `":version (:build)"`.
 
 ```ruby
 update_settings_bundle(
   xcodeproj: "MyProject.xcodeproj",
   key: "CurrentAppVersion",
-  format: ":version-:build"
+  value: ":version-:build"
 )
 ```
 
 Any occurrence of `:version` will be replaced with the marketing version
 from the project. Any occurrence of `:build` will be replaced with the
-build number. For example, the default format results in a formatted
+build number. For example, the default `value` results in a formatted
 version like `1.0.0 (1)`.
 
-Any string is valid for the format. It need not contain either or
+Any string is valid for the value. It need not contain either or
 both the symbols mentioned. If it contains neither, the literal value
-of the format argument will be returned.
+of the format argument will be returned. This can be useful for including
+other settings besides the version and build numbers.
 
 ## Example
 

@@ -34,7 +34,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
       action.run xcodeproj: "MyProject.xcodeproj", key: "CurrentAppVersion",
         configuration: "Release", file: "Root.plist",
-        format: ":version (:build)"
+        value: ":version (:build)"
     end
 
     it 'logs on error' do
