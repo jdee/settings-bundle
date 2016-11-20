@@ -53,10 +53,39 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
 
       # code under test
-      formatted_string = helper.formatted_version_from_info_plist project, "Release"
+      formatted_string = helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
 
       # check results
       expect(formatted_string).to eq "1.0.0 (1)"
+    end
+
+    it 'passes the format argument and Info.plist contents to formatted_version' do
+      # project setting
+      info_plists = { "Release" => "Info.plist" }
+
+      # mock Info.plist
+      info_plist = { "CFBundleShortVersionString" => "1.0.0",
+        "CFBundleVersion" => "1" }
+
+      # mock application target
+      target = double "target",
+        test_target_type?: false,
+        extension_target_type?: false
+
+      expect(target).to receive(:resolved_build_setting)
+        .with("INFOPLIST_FILE") { info_plists }
+
+      # mock project
+      project = double "project", targets: [ target ], path: ""
+
+      # mock out the file read
+      expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
+
+      # partial mock to check that this method is called
+      expect(helper).to receive(:formatted_version).with ":version-:build", "1.0.0", "1"
+
+      # code under test
+      helper.formatted_version_from_info_plist project, "Release", ":version-:build"
     end
 
     it 'raises if no application target found' do
@@ -71,7 +100,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [ test_target, extension_target ]
 
       expect {
-        helper.formatted_version_from_info_plist project, "Release"
+        helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
       }.to raise_error RuntimeError
     end
 
@@ -88,7 +117,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [ target ], path: ""
 
       expect {
-        helper.formatted_version_from_info_plist project, "Release"
+        helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
       }.to raise_error RuntimeError
     end
 
@@ -105,7 +134,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [ target ], path: ""
 
       expect {
-        helper.formatted_version_from_info_plist project, "Release"
+        helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
       }.to raise_error RuntimeError
     end
 
@@ -132,7 +161,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # code under test
       expect {
-        helper.formatted_version_from_info_plist project, "Release"
+        helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
       }.to raise_error RuntimeError
     end
 
@@ -159,7 +188,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # code under test
       expect {
-        helper.formatted_version_from_info_plist project, "Release"
+        helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
       }.to raise_error RuntimeError
     end
   end

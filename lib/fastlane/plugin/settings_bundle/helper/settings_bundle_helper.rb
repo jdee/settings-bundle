@@ -34,7 +34,7 @@ module Fastlane
         # :format: A format containing :version, :build or both
         # :version: The marketing version from the Info.plist
         # :build: The build number from the Info.plist
-        def formatted_version format, version, build
+        def formatted_version(format, version, build)
           format.gsub(/:version/, version.to_s).gsub(/:build/, build.to_s)
         end
 
@@ -45,7 +45,8 @@ module Fastlane
         #
         # :project: An open Xcodeproj::Project via Xcodeproj::Project.open, e.g.
         # :configuration: A valid build configuration in the project
-        def formatted_version_from_info_plist(project, configuration)
+        # :format: The format to use. See formatted_version above
+        def formatted_version_from_info_plist(project, configuration, format)
           # find the first non-test, non-extension target
           # TODO: Make this a :target parameter
           target = project.targets.find { |t| !t.test_target_type? && !t.extension_target_type? }
@@ -78,8 +79,7 @@ module Fastlane
           raise "CFBundleVersion not found in Info.plist" if current_build_number.nil?
 
           # formatted string
-          # TODO: Allow customization
-          "#{current_marketing_version} (#{current_build_number})"
+          formatted_version format, current_marketing_version, current_build_number
         end
 
         # Takes an open Xcodeproj::Project, extracts the settings bundle

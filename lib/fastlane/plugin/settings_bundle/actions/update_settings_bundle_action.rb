@@ -25,15 +25,18 @@ module Fastlane
         key = params[:key]
         configuration = params[:configuration]
         file = params[:file]
+        format = params[:format]
 
         # try to open project file (raises)
         project = Xcodeproj::Project.open params[:xcodeproj]
 
         helper = Helper::SettingsBundleHelper
 
-        current_app_version = helper.formatted_version_from_info_plist project, configuration
+        current_app_version = helper.formatted_version_from_info_plist project,
+          configuration, format
 
-        helper.update_settings_plist_title_setting project, file, key, current_app_version
+        helper.update_settings_plist_title_setting project, file, key,
+          current_app_version
       rescue => e
         UI.user_error! e.message
       end
@@ -68,6 +71,12 @@ module Fastlane
                                description: "The build configuration to use for the Info.plist file",
                                   optional: true,
                              default_value: "Release",
+                                      type: String),
+          FastlaneCore::ConfigItem.new(key: :format,
+                                  env_name: "SETTINGS_BUNDLE_FORMAT",
+                               description: "Specifies how to format the version and build number",
+                                  optional: true,
+                             default_value: ":version (:build)",
                                       type: String),
           FastlaneCore::ConfigItem.new(key: :file,
                                   env_name: "SETTINGS_BUNDLE_FILE",
