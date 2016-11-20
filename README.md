@@ -71,6 +71,14 @@ both the symbols mentioned. If it contains neither, the literal value
 of the format argument will be returned. This can be useful for including
 other settings besides the version and build numbers.
 
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  key: "BuildTime",
+  value: Time.now.strftime "%Y-%m-%d"
+)
+```
+
 ## Example
 
 See the SettingsBundleExample subdirectory for a sample project that
