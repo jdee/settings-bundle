@@ -74,7 +74,7 @@ other settings besides the version and build numbers.
 ```ruby
 update_settings_bundle(
   xcodeproj: "MyProject.xcodeproj",
-  key: "BuildTime",
+  key: "BuildDate",
   value: Time.now.strftime "%Y-%m-%d"
 )
 ```
