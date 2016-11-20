@@ -47,6 +47,24 @@ The `file` argument specifies a file other than `Root.plist` in the
 `Settings.bundle`. If you have multiple projects, keys or files,
 run the action multiple times.
 
+#### Custom formats
+
+You can also override the default format using an optional format
+argument containing the symbols `:version` and `:build`. The default
+format is `":version (:build)"`.
+
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  key: "CurrentAppVersion",
+  format: ":version-:build"
+)
+```
+
+Any string is valid for the format. It need not contain either or
+both the symbols mentioned. If it contains neither, the literal value
+of the format argument will be returned.
+
 ## Example
 
 See the SettingsBundleExample subdirectory for a sample project that

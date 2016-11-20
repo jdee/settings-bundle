@@ -1,15 +1,15 @@
 # Copyright (c) 2016 Jimmy Dee
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,11 +32,13 @@ module Fastlane
 
         helper = Helper::SettingsBundleHelper
 
-        current_app_version = helper.formatted_version_from_info_plist project,
-          configuration, format
+        current_app_version =
+          helper.formatted_version_from_info_plist project,
+                                                   configuration,
+                                                   format
 
         helper.update_settings_plist_title_setting project, file, key,
-          current_app_version
+                                                   current_app_version
       rescue => e
         UI.user_error! e.message
       end
@@ -50,8 +52,7 @@ module Fastlane
       end
 
       def self.details
-        # Optional:
-        "More to come"
+        "This plugin is used to automatically update a Title entry in a plist in an app's Settings bundle after it has been updated, e.g. by the increment_version_number or increment_build_number actions."
       end
 
       def self.available_options

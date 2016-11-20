@@ -1,15 +1,15 @@
 # Copyright (c) 2016 Jimmy Dee
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,7 +24,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
   describe 'formatted_version' do
     it 'returns the version and build number in the specified format' do
       formatted_version = helper.formatted_version ":version (:build)",
-        "1.0.0", "1"
+                                                   "1.0.0", "1"
       expect(formatted_version).to eq "1.0.0 (1)"
     end
   end
@@ -40,14 +40,14 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock application target
       target = double "target",
-        test_target_type?: false,
-        extension_target_type?: false
+                      test_target_type?: false,
+                      extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
         .with("INFOPLIST_FILE") { info_plists }
 
       # mock project
-      project = double "project", targets: [ target ], path: ""
+      project = double "project", targets: [target], path: ""
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
@@ -69,14 +69,14 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock application target
       target = double "target",
-        test_target_type?: false,
-        extension_target_type?: false
+                      test_target_type?: false,
+                      extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
         .with("INFOPLIST_FILE") { info_plists }
 
       # mock project
-      project = double "project", targets: [ target ], path: ""
+      project = double "project", targets: [target], path: ""
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
@@ -90,52 +90,52 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
     it 'raises if no application target found' do
       test_target = double "target",
-        test_target_type?: true,
-        extension_target_type?: false
+                           test_target_type?: true,
+                           extension_target_type?: false
 
       extension_target = double "target",
-        test_target_type?: false,
-        extension_target_type?: true
+                                test_target_type?: false,
+                                extension_target_type?: true
 
-      project = double "project", targets: [ test_target, extension_target ]
+      project = double "project", targets: [test_target, extension_target]
 
-      expect {
+      expect do
         helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
-      }.to raise_error RuntimeError
+      end.to raise_error RuntimeError
     end
 
     it 'raises if INFOPLIST_FILE not found' do
       # mock application target
       target = double "target",
-        test_target_type?: false,
-        extension_target_type?: false
+                      test_target_type?: false,
+                      extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
         .with("INFOPLIST_FILE") { nil }
 
       # mock project
-      project = double "project", targets: [ target ], path: ""
+      project = double "project", targets: [target], path: ""
 
-      expect {
+      expect do
         helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
-      }.to raise_error RuntimeError
+      end.to raise_error RuntimeError
     end
 
     it 'raises if no Info.plist for the specified configuration' do
       # mock application target
       target = double "target",
-        test_target_type?: false,
-        extension_target_type?: false
+                      test_target_type?: false,
+                      extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
         .with("INFOPLIST_FILE") { { "Debug" => "Info.plist" } }
 
       # mock project
-      project = double "project", targets: [ target ], path: ""
+      project = double "project", targets: [target], path: ""
 
-      expect {
+      expect do
         helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
-      }.to raise_error RuntimeError
+      end.to raise_error RuntimeError
     end
 
     it 'raises if no marketing version in Info.plist' do
@@ -147,22 +147,22 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock application target
       target = double "target",
-        test_target_type?: false,
-        extension_target_type?: false
+                      test_target_type?: false,
+                      extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
         .with("INFOPLIST_FILE") { info_plists }
 
       # mock project
-      project = double "project", targets: [ target ], path: ""
+      project = double "project", targets: [target], path: ""
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
 
       # code under test
-      expect {
+      expect do
         helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
-      }.to raise_error RuntimeError
+      end.to raise_error RuntimeError
     end
 
     it 'raises if no build number in Info.plist' do
@@ -174,22 +174,22 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock application target
       target = double "target",
-        test_target_type?: false,
-        extension_target_type?: false
+                      test_target_type?: false,
+                      extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
         .with("INFOPLIST_FILE") { info_plists }
 
       # mock project
-      project = double "project", targets: [ target ], path: ""
+      project = double "project", targets: [target], path: ""
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
 
       # code under test
-      expect {
+      expect do
         helper.formatted_version_from_info_plist project, "Release", ":version (:build)"
-      }.to raise_error RuntimeError
+      end.to raise_error RuntimeError
     end
   end
 
@@ -210,8 +210,8 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock project
       project = double "project",
-        files: [ settings_bundle ],
-        path: "/a/b/c/MyProject.xcodeproj"
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml) { preferences }
@@ -221,16 +221,16 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # code under test
       helper.update_settings_plist_title_setting project, "Root.plist",
-        "CurrentAppVersion", "1.0.0 (1)"
+                                                 "CurrentAppVersion", "1.0.0 (1)"
     end
 
     it 'raises if no Settings.bundle in project' do
       project = double "project", files: []
 
-      expect {
+      expect do
         helper.update_settings_plist_title_setting project, "Root.plist",
-          "CurrentAppVersion", "1.0.0 (1)"
-      }.to raise_error RuntimeError
+                                                   "CurrentAppVersion", "1.0.0 (1)"
+      end.to raise_error RuntimeError
     end
 
     it 'raises if PreferenceSpecifiers not found in plist' do
@@ -239,37 +239,37 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock project
       project = double "project",
-        files: [ settings_bundle ],
-        path: "/a/b/c/MyProject.xcodeproj"
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml) { {} }
 
-      expect {
+      expect do
         helper.update_settings_plist_title_setting project, "Root.plist",
-          "CurrentAppVersion", "1.0.0 (1)"
-      }.to raise_error RuntimeError
+                                                   "CurrentAppVersion", "1.0.0 (1)"
+      end.to raise_error RuntimeError
     end
 
     it 'raises if specified key not found' do
       # Contents of Root.plist
-      preferences = { "PreferenceSpecifiers" => [ ] }
+      preferences = { "PreferenceSpecifiers" => [] }
 
       # mock file
       settings_bundle = double "file", path: "Settings.bundle"
 
       # mock project
       project = double "project",
-        files: [ settings_bundle ],
-        path: "/a/b/c/MyProject.xcodeproj"
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml) { preferences }
 
-      expect {
+      expect do
         helper.update_settings_plist_title_setting project, "Root.plist",
-          "CurrentAppVersion", "1.0.0 (1)"
-      }.to raise_error RuntimeError
+                                                   "CurrentAppVersion", "1.0.0 (1)"
+      end.to raise_error RuntimeError
     end
 
     it 'raises if specified key is not a Title' do
@@ -288,16 +288,16 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # mock project
       project = double "project",
-        files: [ settings_bundle ],
-        path: "/a/b/c/MyProject.xcodeproj"
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
       expect(Plist).to receive(:parse_xml) { preferences }
 
-      expect {
+      expect do
         helper.update_settings_plist_title_setting project, "Root.plist",
-          "CurrentAppVersion", "1.0.0 (1)"
-      }.to raise_error RuntimeError
+                                                   "CurrentAppVersion", "1.0.0 (1)"
+      end.to raise_error RuntimeError
     end
   end
 end
