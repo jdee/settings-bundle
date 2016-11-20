@@ -61,6 +61,11 @@ update_settings_bundle(
 )
 ```
 
+Any occurrence of `:version` will be replaced with the marketing version
+from the project. Any occurrence of `:build` will be replaced with the
+build number. For example, the default format results in a formatted
+version like `1.0.0 (1)'.
+
 Any string is valid for the format. It need not contain either or
 both the symbols mentioned. If it contains neither, the literal value
 of the format argument will be returned.
