@@ -76,7 +76,7 @@ other settings besides the version and build numbers.
 update_settings_bundle(
   xcodeproj: "MyProject.xcodeproj",
   key: "BuildDate",
-  value: Time.now.strftime "%Y-%m-%d"
+  value: Time.now.strftime("%Y-%m-%d")
 )
 ```
 
