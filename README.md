@@ -19,6 +19,8 @@ gem "fastlane-plugin-settings_bundle", git: "https://github.com/jdee/settings-bu
 
 Fastlane plugin to update static settings in an iOS settings bundle
 
+![Sample Settings Bundle](https://github.com/jdee/settings-bundle/blob/master/settings-bundle-example.png)
+
 ### update_settings_bundle
 
 This action updates a specified NSUserDefaults key in the project's
