@@ -57,6 +57,7 @@ module Fastlane
 
       def self.available_options
         [
+          # Required parameters
           FastlaneCore::ConfigItem.new(key: :xcodeproj,
                                   env_name: "SETTINGS_BUNDLE_XCODEPROJ",
                                description: "An Xcode project file whose settings bundle to update",
@@ -67,17 +68,18 @@ module Fastlane
                                description: "The user defaults key to update in the settings bundle",
                                   optional: false,
                                       type: String),
+          FastlaneCore::ConfigItem.new(key: :value,
+                                  env_name: "SETTINGS_BUNDLE_VALUE",
+                               description: "Value to set with optional :version and :build included",
+                             default_value: ":version (:build)",
+                                      type: String),
+
+          # Optional parameters
           FastlaneCore::ConfigItem.new(key: :configuration,
                                   env_name: "SETTINGS_BUNDLE_CONFIGURATION",
                                description: "The build configuration to use for the Info.plist file",
                                   optional: true,
                              default_value: "Release",
-                                      type: String),
-          FastlaneCore::ConfigItem.new(key: :value,
-                                  env_name: "SETTINGS_BUNDLE_VALUE",
-                               description: "Value to set with optional :version and :build included",
-                                  optional: true,
-                             default_value: ":version (:build)",
                                       type: String),
           FastlaneCore::ConfigItem.new(key: :file,
                                   env_name: "SETTINGS_BUNDLE_FILE",
