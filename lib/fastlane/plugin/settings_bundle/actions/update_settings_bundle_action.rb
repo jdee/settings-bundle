@@ -47,16 +47,16 @@ module Fastlane
         "Fastlane plugin action to update static settings in an iOS settings bundle"
       end
 
-      def self.authors
-        ["Jimmy Dee"]
+      def self.author
+        "Jimmy Dee"
       end
 
       def self.details
-        "This action is used to automatically update a Title entry in a plist\n" +
-        "in an app's Settings bundle. It can be used to update the current\n" +
-        "version and/or build number automatically after they have been \n" +
-        "updated, e.g. by the increment_version_number or increment_build_number\n" +
-        "actions."
+        "This action is used to automatically update a Title entry in a plist\n" \
+          "in an app's Settings bundle. It can be used to update the current\n" \
+          "version and/or build number automatically after they have been \n" \
+          "updated, e.g. by the increment_version_number or increment_build_number\n" \
+          "actions."
       end
 
       def self.available_options
@@ -131,6 +131,10 @@ module Fastlane
 
       def self.is_supported?(platform)
         platform == :ios
+      end
+
+      def self.category
+        :project
       end
     end
   end

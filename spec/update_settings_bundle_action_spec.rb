@@ -52,6 +52,12 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
     end
   end
 
+  describe 'category' do
+    it 'is in the :project category' do
+      expect(action.category).to eq(:project)
+    end
+  end
+
   # Satisfy simplecov
   describe 'other methods' do
     it 'has examples' do
@@ -66,8 +72,8 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
       expect(action.details).not_to be nil
     end
 
-    it 'has authors' do
-      expect(action.authors).not_to be nil
+    it 'has an author' do
+      expect(action.author).not_to be nil
     end
 
     it 'has a description' do
