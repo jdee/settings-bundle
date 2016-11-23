@@ -26,8 +26,11 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
       project = double "project"
       expect(Xcodeproj::Project).to receive(:open).with("MyProject.xcodeproj") { project }
 
+      settings = Fastlane::Helper::SettingsBundleHelper::Settings.new "1.0.0", "1"
+
       helper = Fastlane::Helper::SettingsBundleHelper
-      expect(helper).to receive(:formatted_version_from_info_plist).with(project, "Release", ":version (:build)") { "1.0.0 (1)" }
+      expect(helper).to receive(:settings_from_project).with(project, "Release") { settings }
+      expect(helper).to receive(:formatted_value).with(":version (:build)", settings) { "1.0.0 (1)" }
 
       expect(helper).to receive(:update_settings_plist_title_setting)
         .with project, "Root.plist", "CurrentAppVersion", "1.0.0 (1)"

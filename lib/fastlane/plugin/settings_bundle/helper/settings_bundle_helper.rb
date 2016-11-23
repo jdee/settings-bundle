@@ -23,30 +23,29 @@ require 'plist'
 module Fastlane
   module Helper
     class SettingsBundleHelper
+      Settings = Struct.new "Settings", :version, :build
+
       class << self
-        # Takes a format, a version number and a build number and
-        # returns a formatted version according to the specified
-        # format. :version is replaced by the version number. :build
+        # Takes a value, a version number and a build number and
+        # returns a formatted string.
+        # :version is replaced by the version number. :build
         # is replaced by the build number. Neither the version nor
-        # the build number is required, though omitting both from the
+        # the build number is required. Omitting both from the
         # format will result in the format being returned as the value.
         #
-        # :format: A format containing :version, :build or both
-        # :version: The marketing version from the Info.plist
-        # :build: The build number from the Info.plist
-        def formatted_version(format, version, build)
-          format.gsub(/:version/, version.to_s).gsub(/:build/, build.to_s)
+        # :value: A string value containing :version, :build, neither or both
+        # :settings: A Settings struct containing settings from a project
+        def formatted_value(value, settings)
+          value.gsub(/:version/, settings.version.to_s).gsub(/:build/, settings.build.to_s)
         end
 
         # Takes an open Xcodeproj::Project and extracts the current
-        # marketing version and build number as a formatted string.
-        # The format is "#{marketing_version} (#{build_number})".
+        # settings, returning a Settings struct with settings data.
         # Raises on error.
         #
         # :project: An open Xcodeproj::Project via Xcodeproj::Project.open, e.g.
         # :configuration: A valid build configuration in the project
-        # :format: The format to use. See formatted_version above
-        def formatted_version_from_info_plist(project, configuration, format)
+        def settings_from_project(project, configuration)
           # find the first non-test, non-extension target
           # TODO: Make this a :target parameter
           target = project.targets.find { |t| !t.test_target_type? && !t.extension_target_type? }
@@ -78,8 +77,7 @@ module Fastlane
           raise "CFBundleShortVersionString not found in Info.plist" if current_marketing_version.nil?
           raise "CFBundleVersion not found in Info.plist" if current_build_number.nil?
 
-          # formatted string
-          formatted_version format, current_marketing_version, current_build_number
+          Settings.new current_marketing_version, current_build_number
         end
 
         # Takes an open Xcodeproj::Project, extracts the settings bundle

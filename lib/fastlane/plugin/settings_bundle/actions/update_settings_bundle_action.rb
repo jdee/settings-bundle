@@ -32,10 +32,10 @@ module Fastlane
 
         helper = Helper::SettingsBundleHelper
 
-        current_app_version =
-          helper.formatted_version_from_info_plist project,
-                                                   configuration,
-                                                   value
+        current_app_settings =
+          helper.settings_from_project project, configuration
+
+        current_app_version = helper.formatted_value value, current_app_settings
 
         helper.update_settings_plist_title_setting project, file, key,
                                                    current_app_version
