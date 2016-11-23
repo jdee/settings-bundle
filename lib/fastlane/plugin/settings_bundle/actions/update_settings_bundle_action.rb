@@ -52,7 +52,11 @@ module Fastlane
       end
 
       def self.details
-        "This plugin is used to automatically update a Title entry in a plist in an app's Settings bundle after it has been updated, e.g. by the increment_version_number or increment_build_number actions."
+        "This action is used to automatically update a Title entry in a plist\n" +
+        "in an app's Settings bundle. It can be used to update the current\n" +
+        "version and/or build number automatically after they have been \n" +
+        "updated, e.g. by the increment_version_number or increment_build_number\n" +
+        "actions."
       end
 
       def self.available_options
@@ -71,7 +75,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :value,
                                   env_name: "SETTINGS_BUNDLE_VALUE",
                                description: "Value to set with optional :version and :build included",
-                             default_value: ":version (:build)",
+                                  optional: false,
                                       type: String),
 
           # Optional parameters
@@ -95,14 +99,31 @@ module Fastlane
           <<-EOF
             update_settings_bundle(
               xcodeproj: "MyProject.xcodeproj",
-              key: "CurrentAppVersion"
+              key: "CurrentAppVersion",
+              value: ":version (:build)"
             )
           EOF,
           <<-EOF
             update_settings_bundle(
               xcodeproj: "MyProject.xcodeproj",
               file: "About.plist",
-              key: "CurrentAppVersion"
+              key: "CurrentAppVersion",
+              value: ":version (:build)"
+            )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              key: "BuildDate",
+              value: Time.now.strftime("%Y-%m-%d")
+            )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              key: "CurrentAppVersion",
+              value: ":version (:build)",
+              configuration: "Debug"
             )
           EOF
         ]
