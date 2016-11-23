@@ -107,7 +107,7 @@ Now run Fastlane:
 
 ```bash
 bundle install
-bundle exec fastlane update
+bundle exec fastlane test
 ```
 
 Now run the sample app again. It should display 1.0.0 (2). Visit the

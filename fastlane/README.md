@@ -5,11 +5,11 @@ fastlane documentation
 sudo gem install fastlane
 ```
 # Available Actions
-### update
+### test
 ```
-fastlane update
+fastlane test
 ```
-
+Test lane to update SettingsBundleExample
 
 ----
 
