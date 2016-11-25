@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fastlane-plugin-settings_bundle (0.1.0)
+    fastlane-plugin-settings_bundle (1.0.0)
       plist
       xcodeproj (>= 1.4.0)
 
