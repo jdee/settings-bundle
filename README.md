@@ -3,16 +3,12 @@
 [![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg?style=flat)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/jdee/settings-bundle/blob/master/LICENSE)
 [![CircleCI](https://circleci.com/gh/jdee/settings-bundle.svg?style=svg)](https://circleci.com/gh/jdee/settings-bundle)
-# Work in progress
-
-This plugin is currently unfinished and unreleased. See [this issue](https://github.com/jdee/settings-bundle/issues/1) for general discussion.
 
 ## Getting Started
 
-This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-settings_bundle`, 
-add the following line to your Pluginfile until the gem is published:
+This project is a [fastlane](https://github.com/fastlane/fastlane) plugin. To get started with `fastlane-plugin-settings_bundle`, run the following command:
 ```
-gem "fastlane-plugin-settings_bundle", git: "https://github.com/jdee/settings-bundle"
+fastlane add_plugin settings_bundle
 ```
 
 ## About settings_bundle

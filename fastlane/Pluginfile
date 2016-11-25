@@ -1,1 +1,1 @@
-#gem "fastlane-plugin-settings_bundle", path: "."
+#gem "fastlane-plugin-settings_bundle"
