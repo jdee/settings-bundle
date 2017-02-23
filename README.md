@@ -84,6 +84,7 @@ update_settings_bundle(
   key: "CurrentAppVersion",
   value: ":version (:build)",
   configuration: "Debug"
+)
 ```
 
 ## Example
@@ -91,13 +92,12 @@ update_settings_bundle(
 See the SettingsBundleExample subdirectory for a sample project that
 makes use of this action.
 
-First build and run the sample project on a simulator. It should show
+First build and run the sample project on a simulator or device. It should show
 you the current
-version and build number: 1.0.0 (1). This info is taken from the main
-bundle.
+version and build number: 1.0.0 (1). This information is taken from the app's Info.plist.
 
-If you visit the Settings app and look at the settings for
-SettingsBundleExample, you'll see the same version and build number
+Tap the version number to view the settings for
+SettingsBundleExample in the Settings app. You'll see the same version and build number
 as well as a blank field for the Build date.
 
 Now run Fastlane:
@@ -107,8 +107,8 @@ bundle install
 bundle exec fastlane test
 ```
 
-Now run the sample app again. It should display 1.0.0 (2). Visit the
-Settings app under the settings for the app to see the update to the
+Run the sample app again. It should display 1.0.0 (2). Tap the version number again
+to see the update to the
 settings bundle. The Build date field should show the current date.
 
 ## Run tests for this plugin
