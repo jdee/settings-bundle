@@ -49,7 +49,11 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showSettings() {
-        // TODO: Open the Settings app
+        let url = URL(string: UIApplicationOpenSettingsURLString)!
+
+        guard UIApplication.shared.canOpenURL(url) else { return }
+
+        UIApplication.shared.open(url, options: [:]) { _ in }
     }
 }
 
