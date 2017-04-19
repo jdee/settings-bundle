@@ -53,7 +53,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
 
       # code under test
-      settings = helper.settings_from_project project, "Release"
+      settings = helper.settings_from_project project, "Release", nil
 
       # check results
       expect(settings.build).to eq "1"
@@ -72,7 +72,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [test_target, extension_target]
 
       expect do
-        helper.settings_from_project project, "Release"
+        helper.settings_from_project project, "Release", nil
       end.to raise_error RuntimeError
     end
 
@@ -89,7 +89,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [target], path: ""
 
       expect do
-        helper.settings_from_project project, "Release"
+        helper.settings_from_project project, "Release", nil
       end.to raise_error RuntimeError
     end
 
@@ -106,7 +106,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [target], path: ""
 
       expect do
-        helper.settings_from_project project, "Release"
+        helper.settings_from_project project, "Release", nil
       end.to raise_error RuntimeError
     end
 
@@ -133,7 +133,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # code under test
       expect do
-        helper.settings_from_project project, "Release"
+        helper.settings_from_project project, "Release", nil
       end.to raise_error RuntimeError
     end
 
@@ -160,7 +160,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       # code under test
       expect do
-        helper.settings_from_project project, "Release"
+        helper.settings_from_project project, "Release", nil
       end.to raise_error RuntimeError
     end
   end

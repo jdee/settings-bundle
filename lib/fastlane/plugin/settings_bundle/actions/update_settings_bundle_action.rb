@@ -24,6 +24,7 @@ module Fastlane
       def self.run(params)
         key = params[:key]
         configuration = params[:configuration]
+        target_name = params[:target]
         file = params[:file]
         value = params[:value]
 
@@ -32,7 +33,7 @@ module Fastlane
 
         helper = Helper::SettingsBundleHelper
 
-        settings = helper.settings_from_project project, configuration
+        settings = helper.settings_from_project project, configuration, target_name
 
         formatted_value = helper.formatted_value value, settings
 
@@ -89,6 +90,11 @@ module Fastlane
                                description: "The plist file in the Settings.bundle to update",
                                   optional: true,
                              default_value: "Root.plist",
+                                      type: String),
+          FastlaneCore::ConfigItem.new(key: :file,
+                                  env_name: "SETTINGS_BUNDLE_TARGET",
+                               description: "An optional target name from the project",
+                                  optional: true,
                                       type: String)
         ]
       end
@@ -123,6 +129,14 @@ module Fastlane
               key: "CurrentAppVersion",
               value: ":version (:build)",
               configuration: "Debug"
+            )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              key: "CurrentAppVersion",
+              value: ":version (:build)",
+              target: "MyAppTarget"
             )
           EOF
         ]

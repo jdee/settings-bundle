@@ -29,7 +29,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
       settings = Fastlane::Helper::SettingsBundleHelper::Settings.new "1.0.0", "1"
 
       helper = Fastlane::Helper::SettingsBundleHelper
-      expect(helper).to receive(:settings_from_project).with(project, "Release") { settings }
+      expect(helper).to receive(:settings_from_project).with(project, "Release", "MyAppTarget") { settings }
       expect(helper).to receive(:formatted_value).with(":version (:build)", settings) { "1.0.0 (1)" }
 
       expect(helper).to receive(:update_settings_plist_title_setting)
@@ -37,7 +37,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
       action.run xcodeproj: "MyProject.xcodeproj", key: "CurrentAppVersion",
         configuration: "Release", file: "Root.plist",
-        value: ":version (:build)"
+        value: ":version (:build)", target: "MyAppTarget"
     end
 
     it 'logs on error' do
