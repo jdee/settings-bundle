@@ -49,7 +49,7 @@ module Fastlane
         def settings_from_project(project, configuration, target_name)
           if target_name
             target = project.targets.find { |t| t.name == target_name }
-            raise "Target named #{target_name} not found" if target.nil?
+            raise "Target named \"#{target_name}\" not found" if target.nil?
           else
             # find the first non-test, non-extension target
             # TODO: Make this a :target parameter

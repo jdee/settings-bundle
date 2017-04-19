@@ -60,7 +60,42 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(settings.version).to eq "1.0.0"
     end
 
-    it 'raises if no application target found' do
+    it 'finds a target by name' do
+      # project setting
+      info_plists = { "Release" => "Info.plist" }
+
+      # mock Info.plist
+      info_plist = { "CFBundleShortVersionString" => "1.0.0",
+        "CFBundleVersion" => "1" }
+
+      # mock targets
+      test_target = double "target",
+                           name: "MyAppTestTarget",
+                           test_target_type?: true,
+                           extension_target_type?: false
+      target = double "target",
+                      name: "MyAppTarget",
+                      test_target_type?: false,
+                      extension_target_type?: false
+
+      expect(target).to receive(:resolved_build_setting)
+        .with("INFOPLIST_FILE") { info_plists }
+
+      # mock project
+      project = double "project", targets: [test_target, target], path: ""
+
+      # mock out the file read
+      expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
+
+      # code under test
+      settings = helper.settings_from_project project, "Release", "MyAppTarget"
+
+      # check results
+      expect(settings.build).to eq "1"
+      expect(settings.version).to eq "1.0.0"
+    end
+
+    it 'raises if no target specified and application target found' do
       test_target = double "target",
                            test_target_type?: true,
                            extension_target_type?: false
@@ -73,6 +108,18 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
       expect do
         helper.settings_from_project project, "Release", nil
+      end.to raise_error RuntimeError
+    end
+
+    it 'raises if target specified and not found' do
+      application_target = double "target",
+                                  name: "ATarget",
+                                  test_target_type?: false,
+                                  extension_target_type?: false
+
+      project = double "project", targets: [application_target]
+      expect do
+        helper.settings_from_project project, "Release", "MyAppTarget"
       end.to raise_error RuntimeError
     end
 
