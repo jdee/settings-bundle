@@ -1,4 +1,5 @@
 # coding: utf-8
+
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fastlane/plugin/settings_bundle/version'
@@ -6,14 +7,14 @@ require 'fastlane/plugin/settings_bundle/version'
 Gem::Specification.new do |spec|
   spec.name          = 'fastlane-plugin-settings_bundle'
   spec.version       = Fastlane::SettingsBundle::VERSION
-  spec.author        = %q{Jimmy Dee}
-  spec.email         = %q{jgvdthree@gmail.com}
+  spec.author        = 'Jimmy Dee'
+  spec.email         = 'jgvdthree@gmail.com'
 
-  spec.summary       = %q{Fastlane plugin to update static settings in an iOS settings bundle}
+  spec.summary       = 'Fastlane plugin to update static settings in an iOS settings bundle'
   spec.homepage      = "https://github.com/jdee/settings-bundle"
   spec.license       = "MIT"
 
-  spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
+  spec.files         = Dir["lib/**/*"] + %w[README.md LICENSE]
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 

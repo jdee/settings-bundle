@@ -23,23 +23,23 @@ Style/VariableNumber:
 Style/MethodMissing:
   Enabled: false
 
-# 
+#
 #   File.chmod(0777, f)
-# 
+#
 # is easier to read than
-# 
+#
 #   File.chmod(0o777, f)
-# 
+#
 Style/NumericLiteralPrefix:
   Enabled: false
 
-# 
+#
 # command = (!clean_expired.nil? || !clean_pattern.nil?) ? CLEANUP : LIST
-# 
+#
 # is easier to read than
-# 
+#
 # command = !clean_expired.nil? || !clean_pattern.nil? ? CLEANUP : LIST
-# 
+#
 Style/TernaryParentheses:
   Enabled: false
 
@@ -199,4 +199,20 @@ Style/IfInsideElse:
 
 # Sometimes we just want to 'collect'
 Style/CollectionMethods:
+  Enabled: false
+
+# They have not to be snake_case
+Style/FileName:
+  Exclude:
+    - '*.gemspec'
+    - '**/Dangerfile'
+    - '**/Brewfile'
+    - '**/Gemfile'
+    - '**/Podfile'
+    - '**/Rakefile'
+    - '**/Fastfile'
+    - '**/Deliverfile'
+    - '**/Snapfile'
+
+Eval:
   Enabled: false

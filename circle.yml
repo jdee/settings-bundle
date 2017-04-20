@@ -3,7 +3,4 @@ test:
     - bundle exec rake
 machine:
   ruby:
-    version: 2.3.2
-# Enable xcode below if you need macOS
-#   xcode:
-#     version: "7.3"
+    version: 2.4.0

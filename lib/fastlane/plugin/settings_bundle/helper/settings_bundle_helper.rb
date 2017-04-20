@@ -45,11 +45,17 @@ module Fastlane
         #
         # :project: An open Xcodeproj::Project via Xcodeproj::Project.open, e.g.
         # :configuration: A valid build configuration in the project
-        def settings_from_project(project, configuration)
-          # find the first non-test, non-extension target
-          # TODO: Make this a :target parameter
-          target = project.targets.find { |t| !t.test_target_type? && !t.extension_target_type? }
-          raise "No application target found" if target.nil?
+        # :target_name: A valid target name in the project or nil to use the first application target
+        def settings_from_project(project, configuration, target_name)
+          if target_name
+            target = project.targets.find { |t| t.name == target_name }
+            raise "Target named \"#{target_name}\" not found" if target.nil?
+          else
+            # find the first non-test, non-extension target
+            # TODO: Make this a :target parameter
+            target = project.targets.find { |t| !t.test_target_type? && !t.extension_target_type? }
+            raise "No application target found" if target.nil?
+          end
 
           # find the Info.plist paths for all configurations
           info_plist_paths = target.resolved_build_setting "INFOPLIST_FILE"

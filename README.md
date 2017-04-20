@@ -87,6 +87,19 @@ update_settings_bundle(
 )
 ```
 
+#### Target parameter
+
+By default, this action takes the settings from the first non-test, non-extension target in
+the project. Use the optional :target parameter to specify a target by name.
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  key: "CurrentAppVersion",
+  value: ":version (:build)",
+  target: "MyAppTarget"
+)
+```
+
 ## Example
 
 See the SettingsBundleExample subdirectory for a sample project that
