@@ -1,7 +1,8 @@
 # settings_bundle plugin
 
-[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg?style=flat)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
-[![Gem](https://img.shields.io/gem/v/fastlane-plugin-settings_bundle.svg)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
+[![fastlane Plugin Badge](https://rawcdn.githack.com/fastlane/fastlane/master/fastlane/assets/plugin-badge.svg?style=flat-square)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
+[![Gem](https://img.shields.io/gem/v/fastlane-plugin-settings_bundle.svg?style=flat)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
+[![Downloads](https://img.shields.io/gem/dt/fastlane-plugin-settings_bundle.svg?style=flat)](https://rubygems.org/gems/fastlane-plugin-settings_bundle)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/jdee/settings-bundle/blob/master/LICENSE)
 [![CircleCI](https://img.shields.io/circleci/project/github/jdee/settings-bundle.svg)](https://circleci.com/gh/jdee/settings-bundle)
 
