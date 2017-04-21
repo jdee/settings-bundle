@@ -15,6 +15,7 @@
 		7BAD47441EAAA99300080008 /* SettingsBundleExampleFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BAD47421EAAA99300080008 /* SettingsBundleExampleFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7BAD47471EAAA99300080008 /* SettingsBundleExampleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */; };
 		7BAD47481EAAA99300080008 /* SettingsBundleExampleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7BAD474E1EAAAA2F00080008 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BAD474D1EAAAA2F00080008 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingsBundleExampleFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BAD47421EAAA99300080008 /* SettingsBundleExampleFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsBundleExampleFramework.h; sourceTree = "<group>"; };
 		7BAD47431EAAA99300080008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BAD474D1EAAAA2F00080008 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		7BAD470B1EAAA80400080008 = {
 			isa = PBXGroup;
 			children = (
+				7BAD474D1EAAAA2F00080008 /* Settings.bundle */,
 				7BAD47161EAAA80400080008 /* SettingsBundleLibraryExample */,
 				7BAD47411EAAA99300080008 /* SettingsBundleExampleFramework */,
 				7BAD47151EAAA80400080008 /* Products */,
@@ -207,6 +210,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BAD474E1EAAAA2F00080008 /* Settings.bundle in Resources */,
 				7BAD47221EAAA80400080008 /* LaunchScreen.storyboard in Resources */,
 				7BAD471F1EAAA80400080008 /* Assets.xcassets in Resources */,
 				7BAD471D1EAAA80400080008 /* Main.storyboard in Resources */,
@@ -458,6 +462,7 @@
 				7BAD474A1EAAA99300080008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
