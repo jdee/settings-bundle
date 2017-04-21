@@ -462,6 +462,7 @@
 				7BAD475F1EAAB0EB00080008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
