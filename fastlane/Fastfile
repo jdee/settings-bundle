@@ -27,7 +27,7 @@ lane :library_test do
   update_settings_bundle xcodeproj: xcodeproj,
                          target: "SettingsBundleExampleFramework",
                          key: "CurrentFrameworkVersion",
-                         value: ":version",
+                         value: ":version (:build)",
                          file: "Framework.plist"
   update_settings_bundle xcodeproj: xcodeproj,
                          key: "BuildDate",
