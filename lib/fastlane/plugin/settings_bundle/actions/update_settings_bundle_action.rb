@@ -91,7 +91,7 @@ module Fastlane
                                   optional: true,
                              default_value: "Root.plist",
                                       type: String),
-          FastlaneCore::ConfigItem.new(key: :file,
+          FastlaneCore::ConfigItem.new(key: :target,
                                   env_name: "SETTINGS_BUNDLE_TARGET",
                                description: "An optional target name from the project",
                                   optional: true,
