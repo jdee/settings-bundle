@@ -29,22 +29,44 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var button: UIButton!
+    @IBOutlet var label: UILabel!
+
+    var frameworkIdentifier: String {
+        guard let bundleIdentifier = Bundle.main.bundleIdentifier else {
+            fatalError("no identifier for main bundle")
+        }
+
+        var components = bundleIdentifier.components(separatedBy: ".")
+        components[components.count - 1] = "SettingsBundleExampleFramework"
+        return components.joined(separator: ".")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let bundle = Bundle.main
+
+        guard let framework = Bundle(identifier: frameworkIdentifier) else {
+            print("Could not find framework")
+            return
+        }
+
+        let CFBundleShortVersionString = "CFBundleShortVersionString"
         guard
-            let marketingVersion = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
-            let buildNumber = bundle.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
+            let marketingVersion = bundle.object(forInfoDictionaryKey: CFBundleShortVersionString) as? String,
+            let buildNumber = bundle.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String,
+            let frameworkVersionNumber = framework.object(forInfoDictionaryKey: CFBundleShortVersionString) as? String,
+            let frameworkBuildNumber = framework.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
             else {
                 print("Could not find version info in Info.plist")
                 return
         }
 
         let displayVersion = "Version \(marketingVersion) (\(buildNumber))"
+        let frameworkVersion = "Framework version \(frameworkVersionNumber) (\(frameworkBuildNumber))"
 
         button.setTitle(displayVersion, for: .normal)
+        label.text = frameworkVersion
         view.setNeedsLayout()
     }
 
