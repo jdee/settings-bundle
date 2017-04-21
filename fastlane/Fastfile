@@ -4,7 +4,7 @@ default_platform :ios
 
 desc "Test lane to update SettingsBundleExample"
 lane :test do
-  xcodeproj = "SettingsBundleExample/SettingsBundleExample.xcodeproj"
+  xcodeproj = "examples/SettingsBundleExample/SettingsBundleExample.xcodeproj"
 
   increment_build_number xcodeproj: xcodeproj
   update_settings_bundle xcodeproj: xcodeproj,

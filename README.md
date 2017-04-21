@@ -103,7 +103,7 @@ update_settings_bundle(
 
 ## Example
 
-See the SettingsBundleExample subdirectory for a sample project that
+See the examples/SettingsBundleExample subdirectory for a sample project that
 makes use of this action.
 
 First build and run the sample project on a simulator or device. It should show
