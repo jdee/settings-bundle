@@ -12,18 +12,18 @@
 		7BAD471D1EAAA80400080008 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BAD471B1EAAA80400080008 /* Main.storyboard */; };
 		7BAD471F1EAAA80400080008 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BAD471E1EAAA80400080008 /* Assets.xcassets */; };
 		7BAD47221EAAA80400080008 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BAD47201EAAA80400080008 /* LaunchScreen.storyboard */; };
-		7BAD47441EAAA99300080008 /* SettingsBundleExampleFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BAD47421EAAA99300080008 /* SettingsBundleExampleFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7BAD47471EAAA99300080008 /* SettingsBundleExampleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */; };
-		7BAD47481EAAA99300080008 /* SettingsBundleExampleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7BAD474E1EAAAA2F00080008 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7BAD474D1EAAAA2F00080008 /* Settings.bundle */; };
+		7BAD47581EAAB0EB00080008 /* SettingsBundleExampleFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BAD47561EAAB0EB00080008 /* SettingsBundleExampleFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7BAD475B1EAAB0EB00080008 /* SettingsBundleExampleFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD47541EAAB0EB00080008 /* SettingsBundleExampleFramework.framework */; };
+		7BAD475C1EAAB0EB00080008 /* SettingsBundleExampleFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD47541EAAB0EB00080008 /* SettingsBundleExampleFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7BAD47451EAAA99300080008 /* PBXContainerItemProxy */ = {
+		7BAD47591EAAB0EB00080008 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7BAD470C1EAAA80400080008 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7BAD473F1EAAA99300080008;
+			remoteGlobalIDString = 7BAD47531EAAB0EB00080008;
 			remoteInfo = SettingsBundleExampleFramework;
 		};
 /* End PBXContainerItemProxy section */
@@ -35,7 +35,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7BAD47481EAAA99300080008 /* SettingsBundleExampleFramework.framework in Embed Frameworks */,
+				7BAD475C1EAAB0EB00080008 /* SettingsBundleExampleFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,10 +50,10 @@
 		7BAD471E1EAAA80400080008 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7BAD47211EAAA80400080008 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BAD47231EAAA80400080008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingsBundleExampleFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BAD47421EAAA99300080008 /* SettingsBundleExampleFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsBundleExampleFramework.h; sourceTree = "<group>"; };
-		7BAD47431EAAA99300080008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BAD474D1EAAAA2F00080008 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		7BAD47541EAAB0EB00080008 /* SettingsBundleExampleFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SettingsBundleExampleFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BAD47561EAAB0EB00080008 /* SettingsBundleExampleFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsBundleExampleFramework.h; sourceTree = "<group>"; };
+		7BAD47571EAAB0EB00080008 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +61,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BAD47471EAAA99300080008 /* SettingsBundleExampleFramework.framework in Frameworks */,
+				7BAD475B1EAAB0EB00080008 /* SettingsBundleExampleFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BAD473C1EAAA99300080008 /* Frameworks */ = {
+		7BAD47501EAAB0EB00080008 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -80,7 +80,7 @@
 			children = (
 				7BAD474D1EAAAA2F00080008 /* Settings.bundle */,
 				7BAD47161EAAA80400080008 /* SettingsBundleLibraryExample */,
-				7BAD47411EAAA99300080008 /* SettingsBundleExampleFramework */,
+				7BAD47551EAAB0EB00080008 /* SettingsBundleExampleFramework */,
 				7BAD47151EAAA80400080008 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,7 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				7BAD47141EAAA80400080008 /* SettingsBundleLibraryExample.app */,
-				7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */,
+				7BAD47541EAAB0EB00080008 /* SettingsBundleExampleFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,11 +107,11 @@
 			path = SettingsBundleLibraryExample;
 			sourceTree = "<group>";
 		};
-		7BAD47411EAAA99300080008 /* SettingsBundleExampleFramework */ = {
+		7BAD47551EAAB0EB00080008 /* SettingsBundleExampleFramework */ = {
 			isa = PBXGroup;
 			children = (
-				7BAD47421EAAA99300080008 /* SettingsBundleExampleFramework.h */,
-				7BAD47431EAAA99300080008 /* Info.plist */,
+				7BAD47561EAAB0EB00080008 /* SettingsBundleExampleFramework.h */,
+				7BAD47571EAAB0EB00080008 /* Info.plist */,
 			);
 			path = SettingsBundleExampleFramework;
 			sourceTree = "<group>";
@@ -119,11 +119,11 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7BAD473D1EAAA99300080008 /* Headers */ = {
+		7BAD47511EAAB0EB00080008 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BAD47441EAAA99300080008 /* SettingsBundleExampleFramework.h in Headers */,
+				7BAD47581EAAB0EB00080008 /* SettingsBundleExampleFramework.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,21 +142,21 @@
 			buildRules = (
 			);
 			dependencies = (
-				7BAD47461EAAA99300080008 /* PBXTargetDependency */,
+				7BAD475A1EAAB0EB00080008 /* PBXTargetDependency */,
 			);
 			name = SettingsBundleLibraryExample;
 			productName = SettingsBundleLibraryExample;
 			productReference = 7BAD47141EAAA80400080008 /* SettingsBundleLibraryExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7BAD473F1EAAA99300080008 /* SettingsBundleExampleFramework */ = {
+		7BAD47531EAAB0EB00080008 /* SettingsBundleExampleFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7BAD474B1EAAA99300080008 /* Build configuration list for PBXNativeTarget "SettingsBundleExampleFramework" */;
+			buildConfigurationList = 7BAD475D1EAAB0EB00080008 /* Build configuration list for PBXNativeTarget "SettingsBundleExampleFramework" */;
 			buildPhases = (
-				7BAD473B1EAAA99300080008 /* Sources */,
-				7BAD473C1EAAA99300080008 /* Frameworks */,
-				7BAD473D1EAAA99300080008 /* Headers */,
-				7BAD473E1EAAA99300080008 /* Resources */,
+				7BAD474F1EAAB0EB00080008 /* Sources */,
+				7BAD47501EAAB0EB00080008 /* Frameworks */,
+				7BAD47511EAAB0EB00080008 /* Headers */,
+				7BAD47521EAAB0EB00080008 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -164,7 +164,7 @@
 			);
 			name = SettingsBundleExampleFramework;
 			productName = SettingsBundleExampleFramework;
-			productReference = 7BAD47401EAAA99300080008 /* SettingsBundleExampleFramework.framework */;
+			productReference = 7BAD47541EAAB0EB00080008 /* SettingsBundleExampleFramework.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -180,7 +180,7 @@
 						CreatedOnToolsVersion = 8.3.1;
 						ProvisioningStyle = Automatic;
 					};
-					7BAD473F1EAAA99300080008 = {
+					7BAD47531EAAB0EB00080008 = {
 						CreatedOnToolsVersion = 8.3.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -200,7 +200,7 @@
 			projectRoot = "";
 			targets = (
 				7BAD47131EAAA80400080008 /* SettingsBundleLibraryExample */,
-				7BAD473F1EAAA99300080008 /* SettingsBundleExampleFramework */,
+				7BAD47531EAAB0EB00080008 /* SettingsBundleExampleFramework */,
 			);
 		};
 /* End PBXProject section */
@@ -217,7 +217,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BAD473E1EAAA99300080008 /* Resources */ = {
+		7BAD47521EAAB0EB00080008 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -236,7 +236,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BAD473B1EAAA99300080008 /* Sources */ = {
+		7BAD474F1EAAB0EB00080008 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,10 +246,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7BAD47461EAAA99300080008 /* PBXTargetDependency */ = {
+		7BAD475A1EAAB0EB00080008 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7BAD473F1EAAA99300080008 /* SettingsBundleExampleFramework */;
-			targetProxy = 7BAD47451EAAA99300080008 /* PBXContainerItemProxy */;
+			target = 7BAD47531EAAB0EB00080008 /* SettingsBundleExampleFramework */;
+			targetProxy = 7BAD47591EAAB0EB00080008 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -392,14 +392,14 @@
 			};
 			name = Release;
 		};
-		7BAD47491EAAA99300080008 /* Debug */ = {
+		7BAD475E1EAAB0EB00080008 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 2;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SettingsBundleExampleFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -413,14 +413,14 @@
 			};
 			name = Debug;
 		};
-		7BAD474A1EAAA99300080008 /* Release */ = {
+		7BAD475F1EAAB0EB00080008 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 2;
+				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SettingsBundleExampleFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -455,14 +455,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7BAD474B1EAAA99300080008 /* Build configuration list for PBXNativeTarget "SettingsBundleExampleFramework" */ = {
+		7BAD475D1EAAB0EB00080008 /* Build configuration list for PBXNativeTarget "SettingsBundleExampleFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BAD47491EAAA99300080008 /* Debug */,
-				7BAD474A1EAAA99300080008 /* Release */,
+				7BAD475E1EAAB0EB00080008 /* Debug */,
+				7BAD475F1EAAB0EB00080008 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
