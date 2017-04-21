@@ -14,3 +14,21 @@ lane :test do
                          key: "BuildDate",
                          value: Time.now.strftime("%B %-d, %Y")
 end
+
+desc "Test lane to update SettingsBundleLibraryExample"
+lane :library_test do
+  xcodeproj = "examples/SettingsBundleLibraryExample/SettingsBundleLibraryExample.xcodeproj"
+
+  increment_build_number xcodeproj: xcodeproj
+  update_settings_bundle xcodeproj: xcodeproj,
+                         target: "SettingsBundleLibraryExample",
+                         key: "CurrentAppVersion",
+                         value: ":version (:build)"
+  update_settings_bundle xcodeproj: xcodeproj,
+                         target: "SettingsBundleExampleFramework",
+                         key: "CurrentFrameworkVersion",
+                         value: ":version"
+  update_settings_bundle xcodeproj: xcodeproj,
+                         key: "BuildDate",
+                         value: Time.now.strftime("%B %-d, %Y")
+end
