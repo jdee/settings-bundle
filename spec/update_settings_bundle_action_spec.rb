@@ -61,6 +61,34 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
     end
   end
 
+  describe 'options' do
+    let(:options) { action.available_options }
+
+    it 'includes a :xcodeproj option' do
+      expect(options.find { |o| o.key == :xcodeproj && o.env_name == "SETTINGS_BUNDLE_XCODEPROJ" }).not_to be_nil
+    end
+
+    it 'includes a :key option' do
+      expect(options.find { |o| o.key == :key && o.env_name == "SETTINGS_BUNDLE_KEY" }).not_to be_nil
+    end
+
+    it 'includes a :value option' do
+      expect(options.find { |o| o.key == :value && o.env_name == "SETTINGS_BUNDLE_VALUE" }).not_to be_nil
+    end
+
+    it 'includes a :configuration option' do
+      expect(options.find { |o| o.key == :configuration && o.env_name == "SETTINGS_BUNDLE_CONFIGURATION" }).not_to be_nil
+    end
+
+    it 'includes a :file option' do
+      expect(options.find { |o| o.key == :file && o.env_name == "SETTINGS_BUNDLE_FILE" }).not_to be_nil
+    end
+
+    it 'includes a :target option' do
+      expect(options.find { |o| o.key == :target && o.env_name == "SETTINGS_BUNDLE_TARGET" }).not_to be_nil
+    end
+  end
+
   # Satisfy simplecov
   describe 'other methods' do
     it 'has examples' do
