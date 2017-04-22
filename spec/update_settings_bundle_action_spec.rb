@@ -64,6 +64,11 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
   describe 'options' do
     let(:options) { action.available_options }
 
+    it 'has the right number of options' do
+      # reminder to add tests for any new options
+      expect(options.count).to equal(6)
+    end
+
     it 'includes a :xcodeproj option' do
       expect(options.find { |o| o.key == :xcodeproj && o.env_name == "SETTINGS_BUNDLE_XCODEPROJ" }).not_to be_nil
     end
