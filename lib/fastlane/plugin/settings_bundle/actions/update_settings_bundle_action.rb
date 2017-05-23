@@ -33,14 +33,16 @@ module Fastlane
 
         helper = Helper::SettingsBundleHelper
 
+        # raises
         settings = helper.settings_from_project project, configuration, target_name
 
         formatted_value = helper.formatted_value value, settings
 
+        # raises
         helper.update_settings_plist_title_setting project, file, key,
                                                    formatted_value
       rescue => e
-        UI.user_error! e.message
+        UI.user_error! "#{e.message}\n#{e.backtrace}"
       end
 
       def self.description
