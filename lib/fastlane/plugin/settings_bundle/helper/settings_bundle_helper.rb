@@ -73,8 +73,9 @@ module Fastlane
 
           release_info_plist_path = File.join project_parent, release_info_plist_path
 
-          # try to open and parse the Info.plist (raises)
+          # try to open and parse the Info.plist. returns nil on failure.
           info_plist = Plist.parse_xml release_info_plist_path
+          raise "Failed to open plist file #{release_info_plist_path}" if info_plist.nil?
 
           # increments already happened. read the current state.
           current_marketing_version = info_plist["CFBundleShortVersionString"]
@@ -106,8 +107,10 @@ module Fastlane
 
           plist_path = File.join project_parent, settings_bundle_path, file
 
-          # raises
+          # returns nil on failure
           settings_plist = Plist.parse_xml plist_path
+          raise "Failed to open settings plist file #{plist_path}" if settings_plist.nil?
+
           preference_specifiers = settings_plist["PreferenceSpecifiers"]
 
           raise "#{file} is not a settings plist file" if preference_specifiers.nil?

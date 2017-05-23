@@ -157,6 +157,25 @@ describe Fastlane::Helper::SettingsBundleHelper do
       end.to raise_error RuntimeError
     end
 
+    it 'raises if Info.plist cannot be opened' do
+      # mock application target
+      target = double "target",
+                      test_target_type?: false,
+                      extension_target_type?: false
+
+      expect(target).to receive(:resolved_build_setting)
+        .with("INFOPLIST_FILE") { { "Release" => "Info.plist" } }
+
+      # mock project
+      project = double "project", targets: [target], path: ""
+
+      expect(Plist).to receive(:parse_xml) { nil }
+
+      expect do
+        helper.settings_from_project project, "Release", nil
+      end.to raise_error RuntimeError
+    end
+
     it 'raises if no marketing version in Info.plist' do
       # project setting
       info_plists = { "Release" => "Info.plist" }
@@ -245,6 +264,24 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
     it 'raises if no Settings.bundle in project' do
       project = double "project", files: []
+
+      expect do
+        helper.update_settings_plist_title_setting project, "Root.plist",
+                                                   "CurrentAppVersion", "1.0.0 (1)"
+      end.to raise_error RuntimeError
+    end
+
+    it 'raises if the settings plist file cannot be opened' do
+      # mock file
+      settings_bundle = double "file", path: "Settings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock nil return
+      expect(Plist).to receive(:parse_xml) { nil }
 
       expect do
         helper.update_settings_plist_title_setting project, "Root.plist",
