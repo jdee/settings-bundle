@@ -43,7 +43,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
     it 'logs on error' do
       expect(Xcodeproj::Project).to receive(:open).and_raise "Not found"
 
-      expect(FastlaneCore::UI).to receive(:user_error!).with "Not found"
+      expect(FastlaneCore::UI).to receive(:user_error!).with(/Not found/)
 
       action.run xcodeproj: "MyProject.xcodeproj"
     end
