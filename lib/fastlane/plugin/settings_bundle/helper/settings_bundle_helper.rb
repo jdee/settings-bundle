@@ -22,6 +22,7 @@ require 'plist'
 
 module Fastlane
   module Helper
+    UI = FastlaneCore::UI
     class SettingsBundleHelper
       Settings = Struct.new "Settings", :version, :build
 
@@ -105,11 +106,22 @@ module Fastlane
 
           project_parent = File.dirname project.path
 
-          plist_path = File.join project_parent, settings_bundle_path, file
+          UI.message "Looking for settings plist file..."
+          UI.message " project.path = #{project.path}"
+          UI.message " project_parent = #{project_parent}"
+          UI.message " settings_bundle_path = #{settings_bundle_path}"
+          UI.message " file = #{file}"
 
-          # returns nil on failure
-          settings_plist = Plist.parse_xml plist_path
-          raise "Failed to open settings plist file #{plist_path}" if settings_plist.nil?
+          plist_path = File.expand_path File.join(settings_bundle_path, file), project_parent
+
+          UI.message "Opening #{plist_path}..."
+
+          # raises IOError
+          settings_plist = File.open plist_path do |f|
+            Plist.parse_xml f
+          end
+
+          UI.message "Success"
 
           preference_specifiers = settings_plist["PreferenceSpecifiers"]
 
