@@ -121,6 +121,8 @@ module Fastlane
             Plist.parse_xml f
           end
 
+          raise "Could not parse #{plist_path}" if settings_plist.nil?
+
           UI.message "Success"
 
           preference_specifiers = settings_plist["PreferenceSpecifiers"]
