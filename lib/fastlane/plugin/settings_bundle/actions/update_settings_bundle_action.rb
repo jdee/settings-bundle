@@ -146,6 +146,14 @@ module Fastlane
               value: ":version (:build)",
               target: "MyAppTarget"
             )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              key: "CurrentAppVersion",
+              value: ":version (:build)",
+              bundle_name: "MySettings.bundle"
+            )
           EOF
         ]
       end
