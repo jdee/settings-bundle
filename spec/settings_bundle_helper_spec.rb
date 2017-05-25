@@ -270,7 +270,39 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist::Emit).to receive(:save_plist)
 
       # code under test
-      helper.update_settings_plist_title_setting project, "Root.plist",
+      helper.update_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
+                                                 "CurrentAppVersion", "1.0.0 (1)"
+    end
+
+    it 'finds a custom settings bundle by name' do
+      # Contents of Root.plist
+      preferences = {
+        "PreferenceSpecifiers" => [
+          {
+            "Type" => "PSTitleValueSpecifier",
+            "Key" => "CurrentAppVersion"
+          }
+        ]
+      }
+
+      # mock file
+      settings_bundle = double "file", path: "MySettings.bundle", real_path: "/path/to/MySettings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
+      expect(Plist).to receive(:parse_xml) { preferences }
+
+      # and write
+      expect(Plist::Emit).to receive(:save_plist)
+
+      # code under test
+      helper.update_settings_plist_title_setting project, "MySettings.bundle", "Root.plist",
                                                  "CurrentAppVersion", "1.0.0 (1)"
     end
 
@@ -278,7 +310,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", files: []
 
       expect do
-        helper.update_settings_plist_title_setting project, "Root.plist",
+        helper.update_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
                                                    "CurrentAppVersion", "1.0.0 (1)"
       end.to raise_error RuntimeError
     end
@@ -298,7 +330,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist).to receive(:parse_xml) { nil }
 
       expect do
-        helper.update_settings_plist_title_setting project, "Root.plist",
+        helper.update_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
                                                    "CurrentAppVersion", "1.0.0 (1)"
       end.to raise_error RuntimeError
     end
@@ -318,7 +350,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist).to receive(:parse_xml) { {} }
 
       expect do
-        helper.update_settings_plist_title_setting project, "Root.plist",
+        helper.update_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
                                                    "CurrentAppVersion", "1.0.0 (1)"
       end.to raise_error RuntimeError
     end
@@ -341,7 +373,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist).to receive(:parse_xml) { preferences }
 
       expect do
-        helper.update_settings_plist_title_setting project, "Root.plist",
+        helper.update_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
                                                    "CurrentAppVersion", "1.0.0 (1)"
       end.to raise_error RuntimeError
     end
@@ -371,7 +403,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(Plist).to receive(:parse_xml) { preferences }
 
       expect do
-        helper.update_settings_plist_title_setting project, "Root.plist",
+        helper.update_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
                                                    "CurrentAppVersion", "1.0.0 (1)"
       end.to raise_error RuntimeError
     end

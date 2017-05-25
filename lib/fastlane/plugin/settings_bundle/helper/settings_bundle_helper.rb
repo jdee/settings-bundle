@@ -94,13 +94,14 @@ module Fastlane
         # on error.
         #
         # :project: An open Xcodeproj::Project, obtained from Xcodeproj::Project.open, e.g.
+        # :bundle_name: (String) Regex to identify the bundle to look for, usually Settings.bundle.
         # :file: A settings plist file in the Settings.bundle, usually "Root.plist"
         # :key: A valid NSUserDefaults key in the Settings.bundle
         # :value: A new value for the key
-        def update_settings_plist_title_setting(project, file, key, value)
-          settings_bundle = project.files.find { |f| f.path =~ /Settings.bundle/ }
+        def update_settings_plist_title_setting(project, bundle_name, file, key, value)
+          settings_bundle = project.files.find { |f| f.path =~ /#{bundle_name}/ }
 
-          raise "Settings.bundle not found in project" if settings_bundle.nil?
+          raise "#{bundle_name} not found in project" if settings_bundle.nil?
 
           # The #real_path method returns the full resolved path to the Settings.bundle
           settings_bundle_path = settings_bundle.real_path

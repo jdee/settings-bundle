@@ -33,11 +33,11 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
       expect(helper).to receive(:formatted_value).with(":version (:build)", settings) { "1.0.0 (1)" }
 
       expect(helper).to receive(:update_settings_plist_title_setting)
-        .with project, "Root.plist", "CurrentAppVersion", "1.0.0 (1)"
+        .with project, "Settings.bundle", "Root.plist", "CurrentAppVersion", "1.0.0 (1)"
 
       action.run xcodeproj: "MyProject.xcodeproj", key: "CurrentAppVersion",
         configuration: "Release", file: "Root.plist",
-        value: ":version (:build)", target: "MyAppTarget"
+        value: ":version (:build)", target: "MyAppTarget", bundle_name: "Settings.bundle"
     end
 
     it 'logs on error' do
@@ -66,7 +66,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
     it 'has the right number of options' do
       # reminder to add tests for any new options
-      expect(options.count).to equal(6)
+      expect(options.count).to equal(7)
     end
 
     it 'includes a :xcodeproj option' do
@@ -91,6 +91,10 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
     it 'includes a :target option' do
       expect(options.find { |o| o.key == :target && o.env_name == "SETTINGS_BUNDLE_TARGET" }).not_to be_nil
+    end
+
+    it 'includes a :bundle_name option' do
+      expect(options.find { |o| o.key == :bundle_name && o.env_name == "SETTINGS_BUNDLE_BUNDLE_NAME" }).not_to be_nil
     end
   end
 
