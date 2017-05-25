@@ -74,9 +74,9 @@ module Fastlane
 
           release_info_plist_path = File.join project_parent, release_info_plist_path
 
-          # try to open and parse the Info.plist. returns nil on failure.
-          info_plist = Plist.parse_xml release_info_plist_path
-          raise "Failed to open plist file #{release_info_plist_path}" if info_plist.nil?
+          # try to open and parse the Info.plist. raises on failure.
+          info_plist = File.open(release_info_plist_path) { |f| Plist.parse_xml f }
+          raise "Failed to parse plist file #{release_info_plist_path}" if info_plist.nil?
 
           # increments already happened. read the current state.
           current_marketing_version = info_plist["CFBundleShortVersionString"]
@@ -102,28 +102,15 @@ module Fastlane
 
           raise "Settings.bundle not found in project" if settings_bundle.nil?
 
-          settings_bundle_path = settings_bundle.path
+          # The #real_path method returns the full resolved path to the Settings.bundle
+          settings_bundle_path = settings_bundle.real_path
 
-          project_parent = File.dirname project.path
-
-          UI.message "Looking for settings plist file..."
-          UI.message " project.path = #{project.path}"
-          UI.message " project_parent = #{project_parent}"
-          UI.message " settings_bundle_path = #{settings_bundle_path}"
-          UI.message " file = #{file}"
-
-          plist_path = File.expand_path File.join(settings_bundle_path, file), project_parent
-
-          UI.message "Opening #{plist_path}..."
+          plist_path = File.join settings_bundle_path, file
 
           # raises IOError
-          settings_plist = File.open plist_path do |f|
-            Plist.parse_xml f
-          end
+          settings_plist = File.open(plist_path) { |f| Plist.parse_xml f }
 
           raise "Could not parse #{plist_path}" if settings_plist.nil?
-
-          UI.message "Success"
 
           preference_specifiers = settings_plist["PreferenceSpecifiers"]
 

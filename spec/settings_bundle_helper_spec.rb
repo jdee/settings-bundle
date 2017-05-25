@@ -50,7 +50,9 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [target], path: ""
 
       # mock out the file read
-      expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
+      mock_file = double "File"
+      expect(File).to receive(:open).with("./Info.plist").and_yield mock_file
+      expect(Plist).to receive(:parse_xml).with(mock_file) { info_plist }
 
       # code under test
       settings = helper.settings_from_project project, "Release", nil
@@ -85,7 +87,9 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [test_target, target], path: ""
 
       # mock out the file read
-      expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
+      mock_file = double "File"
+      expect(File).to receive(:open).with("./Info.plist").and_yield mock_file
+      expect(Plist).to receive(:parse_xml).with(mock_file) { info_plist }
 
       # code under test
       settings = helper.settings_from_project project, "Release", "MyAppTarget"
@@ -157,7 +161,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       end.to raise_error RuntimeError
     end
 
-    it 'raises if Info.plist cannot be opened' do
+    it 'raises if Info.plist cannot be parsed' do
       # mock application target
       target = double "target",
                       test_target_type?: false,
@@ -169,7 +173,9 @@ describe Fastlane::Helper::SettingsBundleHelper do
       # mock project
       project = double "project", targets: [target], path: ""
 
-      expect(Plist).to receive(:parse_xml) { nil }
+      mock_file = double "File"
+      expect(File).to receive(:open).with("./Info.plist").and_yield mock_file
+      expect(Plist).to receive(:parse_xml).with(mock_file) { nil }
 
       expect do
         helper.settings_from_project project, "Release", nil
@@ -195,7 +201,9 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [target], path: ""
 
       # mock out the file read
-      expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
+      mock_file = double "File"
+      expect(File).to receive(:open).with("./Info.plist").and_yield mock_file
+      expect(Plist).to receive(:parse_xml).with(mock_file) { info_plist }
 
       # code under test
       expect do
@@ -222,7 +230,9 @@ describe Fastlane::Helper::SettingsBundleHelper do
       project = double "project", targets: [target], path: ""
 
       # mock out the file read
-      expect(Plist).to receive(:parse_xml).with("./Info.plist") { info_plist }
+      mock_file = double "File"
+      expect(File).to receive(:open).with("./Info.plist").and_yield mock_file
+      expect(Plist).to receive(:parse_xml).with(mock_file) { info_plist }
 
       # code under test
       expect do
@@ -244,7 +254,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       }
 
       # mock file
-      settings_bundle = double "file", path: "Settings.bundle"
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
 
       # mock project
       project = double "project",
@@ -252,6 +262,8 @@ describe Fastlane::Helper::SettingsBundleHelper do
                        path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
       expect(Plist).to receive(:parse_xml) { preferences }
 
       # and write
@@ -271,9 +283,9 @@ describe Fastlane::Helper::SettingsBundleHelper do
       end.to raise_error RuntimeError
     end
 
-    it 'raises if the settings plist file cannot be opened' do
+    it 'raises if the settings plist file cannot be parsed' do
       # mock file
-      settings_bundle = double "file", path: "Settings.bundle"
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
 
       # mock project
       project = double "project",
@@ -281,6 +293,8 @@ describe Fastlane::Helper::SettingsBundleHelper do
                        path: "/a/b/c/MyProject.xcodeproj"
 
       # mock nil return
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
       expect(Plist).to receive(:parse_xml) { nil }
 
       expect do
@@ -291,7 +305,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
 
     it 'raises if PreferenceSpecifiers not found in plist' do
       # mock file
-      settings_bundle = double "file", path: "Settings.bundle"
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
 
       # mock project
       project = double "project",
@@ -299,6 +313,8 @@ describe Fastlane::Helper::SettingsBundleHelper do
                        path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
       expect(Plist).to receive(:parse_xml) { {} }
 
       expect do
@@ -312,7 +328,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       preferences = { "PreferenceSpecifiers" => [] }
 
       # mock file
-      settings_bundle = double "file", path: "Settings.bundle"
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
 
       # mock project
       project = double "project",
@@ -320,6 +336,8 @@ describe Fastlane::Helper::SettingsBundleHelper do
                        path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
       expect(Plist).to receive(:parse_xml) { preferences }
 
       expect do
@@ -340,7 +358,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
       }
 
       # mock file
-      settings_bundle = double "file", path: "Settings.bundle"
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
 
       # mock project
       project = double "project",
@@ -348,6 +366,8 @@ describe Fastlane::Helper::SettingsBundleHelper do
                        path: "/a/b/c/MyProject.xcodeproj"
 
       # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
       expect(Plist).to receive(:parse_xml) { preferences }
 
       expect do
