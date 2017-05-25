@@ -39,7 +39,7 @@ module Fastlane
         formatted_value = helper.formatted_value value, settings
 
         # raises
-        helper.update_settings_plist_title_setting project, file, key,
+        helper.update_settings_plist_title_setting project, params[:bundle_name], file, key,
                                                    formatted_value
       rescue => e
         UI.user_error! "#{e.message}\n#{e.backtrace}"
@@ -93,6 +93,12 @@ module Fastlane
                                   optional: true,
                              default_value: "Root.plist",
                                       type: String),
+          FastlaneCore::ConfigItem.new(key: :bundle_name,
+                                  env_name: "SETTINGS_BUNDLE_BUNDLE_NAME",
+                               description: "The name of the settings bundle in the project (default Settings.bundle)",
+                                  optional: true,
+                             default_value: "Settings.bundle",
+                                      type: String),
           FastlaneCore::ConfigItem.new(key: :target,
                                   env_name: "SETTINGS_BUNDLE_TARGET",
                                description: "An optional target name from the project",
@@ -139,6 +145,14 @@ module Fastlane
               key: "CurrentAppVersion",
               value: ":version (:build)",
               target: "MyAppTarget"
+            )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
+              xcodeproj: "MyProject.xcodeproj",
+              key: "CurrentAppVersion",
+              value: ":version (:build)",
+              bundle_name: "MySettings.bundle"
             )
           EOF
         ]

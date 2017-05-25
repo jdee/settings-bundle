@@ -101,6 +101,19 @@ update_settings_bundle(
 )
 ```
 
+#### Bundle name parameter
+
+By default, this action looks for a file called `Settings.bundle` in the project. To
+specify a different name for your settings bundle, use the `:bundle_name` option:
+```ruby
+update_settings_bundle(
+  xcodeproj: "MyProject.xcodeproj",
+  key: "CurrentAppVersion",
+  value: ":version (:build)",
+  bundle_name: "MySettings.bundle"
+)
+```
+
 ## Examples
 
 [SettingsBundleExample]: ./examples/SettingsBundleExample
