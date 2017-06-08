@@ -15,7 +15,23 @@ lane :test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  # commit_version_bump xcodeproj: xcodeproj, settings: true
+  commit_version_bump xcodeproj: xcodeproj, settings: true
+end
+
+desc "Test lane to update SettingsBundleGroupExample"
+lane :group_test do
+  xcodeproj = "examples/SettingsBundleGroupExample/SettingsBundleGroupExample.xcodeproj"
+
+  increment_build_number xcodeproj: xcodeproj
+  update_settings_bundle xcodeproj: xcodeproj,
+                         key: "CurrentAppVersion",
+                         value: ":version (:build)"
+  update_settings_bundle xcodeproj: xcodeproj,
+                         key: "BuildDate",
+                         value: Time.now.strftime("%B %-d, %Y")
+
+  # Uncomment to commit these changes.
+  commit_version_bump xcodeproj: xcodeproj, settings: true
 end
 
 desc "Test lane to update SettingsBundleLibraryExample"
@@ -36,5 +52,5 @@ lane :library_test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  # commit_version_bump xcodeproj: xcodeproj, settings: %w{Root.plist Framework.plist}
+  commit_version_bump xcodeproj: xcodeproj, settings: %w{Root.plist Framework.plist}
 end
