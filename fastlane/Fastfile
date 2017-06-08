@@ -13,6 +13,9 @@ lane :test do
   update_settings_bundle xcodeproj: xcodeproj,
                          key: "BuildDate",
                          value: Time.now.strftime("%B %-d, %Y")
+
+  # Uncomment to commit these changes.
+  # commit_version_bump xcodeproj: xcodeproj, settings: true
 end
 
 desc "Test lane to update SettingsBundleLibraryExample"
@@ -31,4 +34,7 @@ lane :library_test do
                          file: "Framework.plist"
   update_settings_bundle key: "BuildDate",
                          value: Time.now.strftime("%B %-d, %Y")
+
+  # Uncomment to commit these changes.
+  # commit_version_bump xcodeproj: xcodeproj, settings: %w{Root.plist Framework.plist}
 end
