@@ -126,7 +126,7 @@ module Fastlane
           # Save (raises)
           Plist::Emit.save_plist settings_plist, plist_path
 
-          Actions.add_modified_files [plist_path] if defined?(Actions.modified_files)
+          Actions.add_modified_files [plist_path] if defined?(Actions.add_modified_files)
         end
 
         def xcodeproj_path_from_params(params)
