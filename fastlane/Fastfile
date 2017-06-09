@@ -52,5 +52,5 @@ lane :library_test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  commit_version_bump xcodeproj: xcodeproj, settings: %w{Root.plist Framework.plist}
+  commit_version_bump xcodeproj: xcodeproj, settings: %w[Root.plist Framework.plist]
 end
