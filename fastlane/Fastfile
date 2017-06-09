@@ -15,7 +15,7 @@ lane :test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  commit_version_bump xcodeproj: xcodeproj, settings: true
+  commit_version_bump xcodeproj: xcodeproj, include: "examples/SettingsBundleExample/Settings.bundle/Root.plist"
 end
 
 desc "Test lane to update SettingsBundleGroupExample"
