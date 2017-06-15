@@ -28,10 +28,14 @@ module Fastlane
         file = params[:file]
         value = params[:value]
 
-        # try to open project file (raises)
-        project = Xcodeproj::Project.open params[:xcodeproj]
-
         helper = Helper::SettingsBundleHelper
+
+        xcodeproj_path = helper.xcodeproj_path_from_params params
+        # Error already reported in helper
+        return if xcodeproj_path.nil?
+
+        # try to open project file (raises)
+        project = Xcodeproj::Project.open xcodeproj_path
 
         # raises
         settings = helper.settings_from_project project, configuration, target_name
@@ -64,11 +68,6 @@ module Fastlane
       def self.available_options
         [
           # Required parameters
-          FastlaneCore::ConfigItem.new(key: :xcodeproj,
-                                  env_name: "SETTINGS_BUNDLE_XCODEPROJ",
-                               description: "An Xcode project file whose settings bundle to update",
-                                  optional: false,
-                                      type: String),
           FastlaneCore::ConfigItem.new(key: :key,
                                   env_name: "SETTINGS_BUNDLE_KEY",
                                description: "The user defaults key to update in the settings bundle",
@@ -81,6 +80,11 @@ module Fastlane
                                       type: String),
 
           # Optional parameters
+          FastlaneCore::ConfigItem.new(key: :xcodeproj,
+                                  env_name: "SETTINGS_BUNDLE_XCODEPROJ",
+                               description: "An Xcode project file whose settings bundle to update",
+                                  optional: true,
+                                      type: String),
           FastlaneCore::ConfigItem.new(key: :configuration,
                                   env_name: "SETTINGS_BUNDLE_CONFIGURATION",
                                description: "The build configuration to use for the Info.plist file",
@@ -111,7 +115,6 @@ module Fastlane
         [
           <<-EOF
             update_settings_bundle(
-              xcodeproj: "MyProject.xcodeproj",
               key: "CurrentAppVersion",
               value: ":version (:build)"
             )
@@ -119,6 +122,12 @@ module Fastlane
           <<-EOF
             update_settings_bundle(
               xcodeproj: "MyProject.xcodeproj",
+              key: "CurrentAppVersion",
+              value: ":version (:build)"
+            )
+          EOF,
+          <<-EOF
+            update_settings_bundle(
               file: "About.plist",
               key: "CurrentAppVersion",
               value: ":version (:build)"
@@ -126,14 +135,12 @@ module Fastlane
           EOF,
           <<-EOF
             update_settings_bundle(
-              xcodeproj: "MyProject.xcodeproj",
               key: "BuildDate",
               value: Time.now.strftime("%Y-%m-%d")
             )
           EOF,
           <<-EOF
             update_settings_bundle(
-              xcodeproj: "MyProject.xcodeproj",
               key: "CurrentAppVersion",
               value: ":version (:build)",
               configuration: "Debug"
@@ -141,7 +148,6 @@ module Fastlane
           EOF,
           <<-EOF
             update_settings_bundle(
-              xcodeproj: "MyProject.xcodeproj",
               key: "CurrentAppVersion",
               value: ":version (:build)",
               target: "MyAppTarget"
@@ -149,7 +155,6 @@ module Fastlane
           EOF,
           <<-EOF
             update_settings_bundle(
-              xcodeproj: "MyProject.xcodeproj",
               key: "CurrentAppVersion",
               value: ":version (:build)",
               bundle_name: "MySettings.bundle"

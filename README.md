@@ -29,7 +29,6 @@ the current build number.
 
 ```ruby
 update_settings_bundle(
-  xcodeproj: "MyProject.xcodeproj",
   key: "CurrentAppVersion",
   value: ":version (:build)"
 )
@@ -41,11 +40,24 @@ specified format. Use the action this way after `increment_build_number` or
 `increment_version_number` to update your settings bundle as part of a
 version bump.
 
+#### Specifying the project file
+
+By default, the action looks for a single .xcodeproj file in the repo,
+excluding any under Pods. If more than one is present, use the `:xcodeproj`
+parameter:
+
+```ruby
+update_settings_bundle(
+  xcodeproj: "./MyProject.xcodeproj",
+  key: "CurrentAppVersion",
+  value: ":version (:build)"
+)
+```
+
 #### Files other than Root.plist
 
 ```ruby
 update_settings_bundle(
-  xcodeproj: "MyProject.xcodeproj",
   file: "About.plist",
   key: "CurrentAppVersion",
   value: ":version (:build)"
@@ -65,7 +77,6 @@ other settings besides the version and build numbers.
 
 ```ruby
 update_settings_bundle(
-  xcodeproj: "MyProject.xcodeproj",
   key: "BuildDate",
   value: Time.now.strftime("%Y-%m-%d")
 )
@@ -81,7 +92,6 @@ different configuration, use a `configuration` parameter:
 
 ```ruby
 update_settings_bundle(
-  xcodeproj: "MyProject.xcodeproj",
   key: "CurrentAppVersion",
   value: ":version (:build)",
   configuration: "Debug"
@@ -94,7 +104,6 @@ By default, this action takes the settings from the first non-test, non-extensio
 the project. Use the optional :target parameter to specify a target by name.
 ```ruby
 update_settings_bundle(
-  xcodeproj: "MyProject.xcodeproj",
   key: "CurrentAppVersion",
   value: ":version (:build)",
   target: "MyAppTarget"
@@ -107,7 +116,6 @@ By default, this action looks for a file called `Settings.bundle` in the project
 specify a different name for your settings bundle, use the `:bundle_name` option:
 ```ruby
 update_settings_bundle(
-  xcodeproj: "MyProject.xcodeproj",
   key: "CurrentAppVersion",
   value: ":version (:build)",
   bundle_name: "MySettings.bundle"
