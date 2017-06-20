@@ -58,15 +58,10 @@ module Fastlane
             raise "No application target found" if target.nil?
           end
 
-          # find the Info.plist paths for all configurations
-          info_plist_paths = target.resolved_build_setting "INFOPLIST_FILE"
-
-          raise "INFOPLIST_FILE not found in target" if info_plist_paths.nil? or info_plist_paths.empty?
-
           # this can differ from one configuration to another.
           # take from Release, since only one Settings.bundle per project
           # (not per configuration)
-          release_info_plist_path = info_plist_paths[configuration]
+          release_info_plist_path = expanded_build_setting target, "INFOPLIST_FILE", configuration
 
           raise "Info.plist not found for configuration #{configuration}" if release_info_plist_path.nil?
 
@@ -158,6 +153,31 @@ module Fastlane
 
           # one project found: great
           xcodeproj_paths.first
+        end
+
+        def expanded_build_setting(target, setting_name, configuration)
+          setting_values = target.resolved_build_setting setting_name
+          return if setting_values.nil?
+          setting_value = setting_values[configuration]
+          return if setting_value.nil?
+          expand_macros target, setting_value, configuration
+        end
+
+        def expand_macros(target, setting_value, configuration)
+          # TODO: Properly balance these delimiters. Currently it will also match
+          # $(SETTING} and ${SETTING). See the pending spec.
+          matches = /\$[{(]([^})]+)[})]/.match(setting_value)
+          return setting_value if matches.nil?
+
+          macro_name = matches[1]
+          return setting_value if macro_name.nil?
+
+          expanded_macro = macro_name == "SRCROOT" ? "." : expanded_build_setting(target, macro_name, configuration)
+          return setting_value if expanded_macro.nil?
+
+          setting_value.gsub!(/\$[{(]#{macro_name}[})]/, expanded_macro)
+
+          expand_macros target, setting_value, configuration
         end
       end
     end
