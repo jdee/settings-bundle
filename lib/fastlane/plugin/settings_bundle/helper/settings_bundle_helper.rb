@@ -156,28 +156,21 @@ module Fastlane
         end
 
         def expanded_build_setting(target, setting_name, configuration)
-          setting_values = target.resolved_build_setting setting_name
-          return if setting_values.nil?
-          setting_value = setting_values[configuration]
+          setting_value = target.resolved_build_setting(setting_name)[configuration]
           return if setting_value.nil?
-          expand_macros target, setting_value, configuration
-        end
 
-        def expand_macros(target, setting_value, configuration)
-          # TODO: Properly balance these delimiters. Currently it will also match
-          # $(SETTING} and ${SETTING). See the pending spec.
-          matches = /\$[{(]([^})]+)[})]/.match(setting_value)
-          return setting_value if matches.nil?
+          search_position = 0
+          while (matches = /\$\(([^(){}]*)\)|\$\{([^(){}]*)\}/.match(setting_value, search_position))
+            macro_name = matches[1] || matches[2]
+            search_position = setting_value.index(macro_name) - 2
 
-          macro_name = matches[1]
-          return setting_value if macro_name.nil?
+            expanded_macro = macro_name == "SRCROOT" ? "." : expanded_build_setting(target, macro_name, configuration)
+            search_position += macro_name.length + 3 and next if expanded_macro.nil?
 
-          expanded_macro = macro_name == "SRCROOT" ? "." : expanded_build_setting(target, macro_name, configuration)
-          return setting_value if expanded_macro.nil?
-
-          setting_value.gsub!(/\$[{(]#{macro_name}[})]/, expanded_macro)
-
-          expand_macros target, setting_value, configuration
+            setting_value.gsub!(/\$\(#{macro_name}\)|\$\{#{macro_name}\}/, expanded_macro)
+            search_position += expanded_macro.length
+          end
+          setting_value
         end
       end
     end
