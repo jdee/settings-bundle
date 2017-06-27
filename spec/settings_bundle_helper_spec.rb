@@ -134,7 +134,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
                       extension_target_type?: false
 
       expect(target).to receive(:resolved_build_setting)
-        .with("INFOPLIST_FILE") { nil }
+        .with("INFOPLIST_FILE") { { "Release" => nil } }
 
       # mock project
       project = double "project", targets: [target], path: ""
