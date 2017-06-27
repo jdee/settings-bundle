@@ -482,10 +482,7 @@ describe Fastlane::Helper::SettingsBundleHelper do
     end
 
     it "balances delimiters" do
-      pending "sort out the regex matching"
       expect(target).to receive(:resolved_build_setting).with("SETTING_WITH_NESTED_VALUES") { { "Release" => "$(SETTING_VALUE1}.${SETTING_VALUE2)" } }
-      expect(target).to receive(:resolved_build_setting).with("SETTING_VALUE1") { { "Release" => "value1" } }
-      expect(target).to receive(:resolved_build_setting).with("SETTING_VALUE2") { { "Release" => "value2" } }
       expect(helper.expanded_build_setting(target, "SETTING_WITH_NESTED_VALUES", "Release")).to eq "$(SETTING_VALUE1}.${SETTING_VALUE2)"
     end
 
@@ -494,6 +491,13 @@ describe Fastlane::Helper::SettingsBundleHelper do
       expect(target).to receive(:resolved_build_setting).with("SETTING_VALUE1") { { "Release" => "$(SETTING_VALUE2)" } }
       expect(target).to receive(:resolved_build_setting).with("SETTING_VALUE2") { { "Release" => "value2" } }
       expect(helper.expanded_build_setting(target, "SETTING_WITH_NESTED_VALUES", "Release")).to eq "value2"
+    end
+
+    it "returns the unexpanded macro for nonexistent settings" do
+      expect(target).to receive(:resolved_build_setting).with("SETTING_WITH_BOGUS_VALUE") { { "Release" => "$(SETTING_VALUE1).$(SETTING_VALUE2)" } }
+      expect(target).to receive(:resolved_build_setting).with("SETTING_VALUE1") { { "Release" => nil } }
+      expect(target).to receive(:resolved_build_setting).with("SETTING_VALUE2") { { "Release" => "value2" } }
+      expect(helper.expanded_build_setting(target, "SETTING_WITH_BOGUS_VALUE", "Release")).to eq "$(SETTING_VALUE1).value2"
     end
   end
 end
