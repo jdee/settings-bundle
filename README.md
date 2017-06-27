@@ -122,6 +122,50 @@ update_settings_bundle(
 )
 ```
 
+### Use with commit_version_bump
+
+The built-in `commit_version_bump` action can optionally include files from the
+`Settings.bundle` using the `:settings` option. See [the Fastlane docs](https://docs.fastlane.tools/actions/#source-control)
+for more details on `commit_version_bump`.
+
+To include an update to `Settings.bundle/Root.plist` in your version bump, pass
+`settings: true`:
+```ruby
+increment_build_number
+update_settings_bundle key: "CurrentAppVersion",
+                     value: ":version (:build)"
+commit_version_bump settings: true
+```
+
+To include an update to `Settings.bundle/About.plist` in your version bump,
+pass a string argument for `:settings` with the name of the file in the
+`Settings.bundle`:
+```ruby
+increment_build_number
+update_settings_bundle key: "CurrentAppVersion",
+                     value: ":version (:build)",
+                      file: "About.plist"
+commit_version_bump settings: "About.plist"
+```
+
+To include multiple plists from the `Settings.bundle`, specify an array of
+strings for the `:settings` option:
+```ruby
+increment_build_number
+update_settings_bundle key: "CurrentAppVersion",
+                     value: ":version (:build)" # in Root.plist
+update_settings_bundle key: "CurrentFrameworkVersion",
+                     value: ":version (:build)",
+                      file: "Framework.plist",
+                    target: "MyFramework"
+commit_version_bump settings: %w{
+  Framework.plist
+  Root.plist
+}
+```
+
+Also see the [example apps](./examples) and [example Fastfile](./fastlane/Fastfile) in the repo.
+
 ## Examples
 
 [SettingsBundleExample]: ./examples/SettingsBundleExample
