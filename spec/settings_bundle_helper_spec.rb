@@ -409,6 +409,144 @@ describe Fastlane::Helper::SettingsBundleHelper do
     end
   end
 
+  describe 'remove_settings_plist_title_setting' do
+    it 'removes the item from the Settings.bundle as specified' do
+      # Contents of Root.plist
+      preferences = {
+        "PreferenceSpecifiers" => [
+          {
+            "Type" => "PSTitleValueSpecifier",
+            "Key" => "ItemToRemove"
+          }
+        ]
+      }
+
+      # mock file
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
+      expect(Plist).to receive(:parse_xml) { preferences }
+
+      # and write
+      expect(Plist::Emit).to receive(:save_plist)
+
+      # code under test
+      helper.remove_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
+                                                 "ItemToRemove"
+    end
+
+    it 'finds a custom settings bundle by name' do
+      # Contents of Root.plist
+      preferences = {
+        "PreferenceSpecifiers" => [
+          {
+            "Type" => "PSTitleValueSpecifier",
+            "Key" => "ItemToRemove"
+          }
+        ]
+      }
+
+      # mock file
+      settings_bundle = double "file", path: "MySettings.bundle", real_path: "/path/to/MySettings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
+      expect(Plist).to receive(:parse_xml) { preferences }
+
+      # and write
+      expect(Plist::Emit).to receive(:save_plist)
+
+      # code under test
+      helper.remove_settings_plist_title_setting project, "MySettings.bundle", "Root.plist",
+                                                 "ItemToRemove"
+    end
+
+    it 'raises if no Settings.bundle in project' do
+      project = double "project", files: []
+
+      expect do
+        helper.remove_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
+                                                   "ItemToRemove"
+      end.to raise_error RuntimeError
+    end
+
+    it 'raises if the settings plist file cannot be parsed' do
+      # mock file
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock nil return
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
+      expect(Plist).to receive(:parse_xml) { nil }
+
+      expect do
+        helper.remove_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
+                                                   "ItemToRemove"
+      end.to raise_error RuntimeError
+    end
+
+    it 'raises if PreferenceSpecifiers not found in plist' do
+      # mock file
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
+      expect(Plist).to receive(:parse_xml) { {} }
+
+      expect do
+        helper.remove_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
+                                                   "ItemToRemove"
+      end.to raise_error RuntimeError
+    end
+
+    it 'raises if specified key not found' do
+      # Contents of Root.plist
+      preferences = { "PreferenceSpecifiers" => [] }
+
+      # mock file
+      settings_bundle = double "file", path: "Settings.bundle", real_path: "/path/to/Settings.bundle"
+
+      # mock project
+      project = double "project",
+                       files: [settings_bundle],
+                       path: "/a/b/c/MyProject.xcodeproj"
+
+      # mock out the file read
+      mock_file = double "File"
+      expect(File).to receive(:open).and_yield mock_file
+      expect(Plist).to receive(:parse_xml) { preferences }
+
+      expect do
+        helper.remove_settings_plist_title_setting project, "Settings.bundle", "Root.plist",
+                                                   "ItemToRemove"
+      end.to raise_error RuntimeError
+    end
+  end
+
   describe 'xcodeproj_path_from_params' do
     let (:root) { Bundler.root }
 
