@@ -45,7 +45,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
       expect(FastlaneCore::UI).to receive(:user_error!).with(/Not found/)
 
-      action.run xcodeproj: "MyProject.xcodeproj"
+      action.run xcodeproj: "MyProject.xcodeproj", key: "foo", value: "bar"
     end
   end
 
@@ -66,7 +66,7 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
     it 'has the right number of options' do
       # reminder to add tests for any new options
-      expect(options.count).to equal(7)
+      expect(options.count).to equal(8)
     end
 
     it 'includes a :xcodeproj option' do
@@ -95,6 +95,10 @@ describe Fastlane::Actions::UpdateSettingsBundleAction do
 
     it 'includes a :bundle_name option' do
       expect(options.find { |o| o.key == :bundle_name && o.env_name == "SETTINGS_BUNDLE_BUNDLE_NAME" }).not_to be_nil
+    end
+
+    it 'includes a :remove option' do
+      expect(options.find { |o| o.key == :remove && o.env_name == "SETTINGS_BUNDLE_REMOVE_SETTING" }).not_to be_nil
     end
   end
 

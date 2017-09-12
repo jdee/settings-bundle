@@ -27,6 +27,11 @@ module Fastlane
         target_name = params[:target]
         file = params[:file]
         value = params[:value]
+        remove = params[:remove]
+
+        # Must specify :remove or :value, but not both
+        UI.user_error! "Must specify :remove or :value" unless remove || value
+        UI.user_error! ":remove and :value are mutually exclusive" if remove && value
 
         helper = Helper::SettingsBundleHelper
 
@@ -37,14 +42,18 @@ module Fastlane
         # try to open project file (raises)
         project = Xcodeproj::Project.open xcodeproj_path
 
-        # raises
-        settings = helper.settings_from_project project, configuration, target_name
+        if remove
+          helper.remove_setting_from_settings_plist project, params[:bundle_name], file, key
+        else
+          # raises
+          settings = helper.settings_from_project project, configuration, target_name
 
-        formatted_value = helper.formatted_value value, settings
+          formatted_value = helper.formatted_value value, settings
 
-        # raises
-        helper.update_settings_plist_title_setting project, params[:bundle_name], file, key,
-                                                   formatted_value
+          # raises
+          helper.update_settings_plist_title_setting project, params[:bundle_name], file, key,
+                                                     formatted_value
+        end
       rescue => e
         UI.user_error! "#{e.message}\n#{e.backtrace}"
       end
@@ -73,13 +82,13 @@ module Fastlane
                                description: "The user defaults key to update in the settings bundle",
                                   optional: false,
                                       type: String),
+
+          # Optional parameters
           FastlaneCore::ConfigItem.new(key: :value,
                                   env_name: "SETTINGS_BUNDLE_VALUE",
                                description: "Value to set with optional :version and :build included",
-                                  optional: false,
+                                  optional: true,
                                       type: String),
-
-          # Optional parameters
           FastlaneCore::ConfigItem.new(key: :xcodeproj,
                                   env_name: "SETTINGS_BUNDLE_XCODEPROJ",
                                description: "An Xcode project file whose settings bundle to update",
@@ -107,7 +116,13 @@ module Fastlane
                                   env_name: "SETTINGS_BUNDLE_TARGET",
                                description: "An optional target name from the project",
                                   optional: true,
-                                      type: String)
+                                      type: String),
+          FastlaneCore::ConfigItem.new(key: :remove,
+                                  env_name: "SETTINGS_BUNDLE_REMOVE_SETTING",
+                               description: "",
+                                  optional: true,
+                             default_value: false,
+                                 is_string: false)
         ]
       end
 

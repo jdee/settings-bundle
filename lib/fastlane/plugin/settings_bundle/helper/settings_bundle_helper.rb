@@ -94,6 +94,56 @@ module Fastlane
         # :key: A valid NSUserDefaults key in the Settings.bundle
         # :value: A new value for the key
         def update_settings_plist_title_setting(project, bundle_name, file, key, value)
+          update_settings_plist_file project, bundle_name, file do |settings_plist|
+            preference_specifiers = settings_plist["PreferenceSpecifiers"]
+
+            raise "#{file} is not a settings plist file" if preference_specifiers.nil?
+
+            # Find the specifier for the supplied key
+            title_specifier = preference_specifiers.find do |specifier|
+              specifier["Key"] == key
+            end
+
+            raise "preference specifier for key #{key} not found in #{file}" if title_specifier.nil?
+            raise "preference for key #{key} must be of type title" unless title_specifier["Type"] == "PSTitleValueSpecifier"
+
+            # Update to the new value. Old value need not be present.
+            title_specifier["DefaultValue"] = value.to_s
+          end
+        end
+
+        def remove_setting_from_settings_plist(project, bundle_name, file, key)
+          update_settings_plist_file project, bundle_name, file do |settings_plist|
+            preference_specifiers = settings_plist["PreferenceSpecifiers"]
+
+            raise "#{file} is not a settings plist file" if preference_specifiers.nil?
+
+            specifier = preference_specifiers.find do |s|
+              s["Key"] == key
+            end
+
+            raise "preference specifier for key #{key} not found in #{file}" if specifier.nil?
+
+            preference_specifiers.delete specifier
+          end
+        end
+
+        def update_settings_plist_file(project, bundle_name, file, &block)
+          plist_path = settings_plist_path_from_project project, bundle_name, file
+
+          # raises IOError
+          settings_plist = File.open(plist_path) { |f| Plist.parse_xml f }
+
+          raise "Could not parse #{plist_path}" if settings_plist.nil?
+
+          # The provided block will modify the settings_plist Hash
+          yield settings_plist
+
+          # Save (raises)
+          Plist::Emit.save_plist settings_plist, plist_path
+        end
+
+        def settings_plist_path_from_project(project, bundle_name, file)
           settings_bundle = project.files.find { |f| f.path =~ /#{bundle_name}/ }
 
           raise "#{bundle_name} not found in project" if settings_bundle.nil?
@@ -101,30 +151,7 @@ module Fastlane
           # The #real_path method returns the full resolved path to the Settings.bundle
           settings_bundle_path = settings_bundle.real_path
 
-          plist_path = File.join settings_bundle_path, file
-
-          # raises IOError
-          settings_plist = File.open(plist_path) { |f| Plist.parse_xml f }
-
-          raise "Could not parse #{plist_path}" if settings_plist.nil?
-
-          preference_specifiers = settings_plist["PreferenceSpecifiers"]
-
-          raise "#{file} is not a settings plist file" if preference_specifiers.nil?
-
-          # Find the specifier for the supplied key
-          title_specifier = preference_specifiers.find do |specifier|
-            specifier["Key"] == key
-          end
-
-          raise "preference specifier for key #{key} not found in #{file}" if title_specifier.nil?
-          raise "preference for key #{key} must be of type title" unless title_specifier["Type"] == "PSTitleValueSpecifier"
-
-          # Update to the new value. Old value need not be present.
-          title_specifier["DefaultValue"] = value.to_s
-
-          # Save (raises)
-          Plist::Emit.save_plist settings_plist, plist_path
+          File.join settings_bundle_path, file
         end
 
         def xcodeproj_path_from_params(params)
