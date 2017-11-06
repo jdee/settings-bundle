@@ -1,4 +1,4 @@
-fastlane_version "2.39.0"
+fastlane_version "2.64.0"
 
 default_platform :ios
 
@@ -15,8 +15,7 @@ lane :test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  commit_version_bump xcodeproj: xcodeproj, include: "examples/SettingsBundleExample/Settings.bundle/Root.plist"
-end
+  # commit_version_bump xcodeproj: xcodeproj
 
 desc "Test lane to update SettingsBundleGroupExample"
 lane :group_test do
@@ -31,7 +30,7 @@ lane :group_test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  commit_version_bump xcodeproj: xcodeproj, settings: true
+  # commit_version_bump xcodeproj: xcodeproj
 end
 
 desc "Test lane to update SettingsBundleLibraryExample"
@@ -52,5 +51,5 @@ lane :library_test do
                          value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
-  commit_version_bump xcodeproj: xcodeproj
+  # commit_version_bump xcodeproj: xcodeproj
 end
