@@ -16,6 +16,7 @@ lane :test do
 
   # Uncomment to commit these changes.
   # commit_version_bump xcodeproj: xcodeproj
+end
 
 desc "Test lane to update SettingsBundleGroupExample"
 lane :group_test do
