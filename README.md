@@ -124,9 +124,9 @@ update_settings_bundle(
 
 ### Use with commit_version_bump
 
-As of version 1.3.0 (which requires Fastlane 2.64.0), it is no longer necessary
+As of version 1.3.0, it is no longer necessary
 to pass a `settings` parameter to the built-in `commit_version_bump` action
-when using `update_settings_bundle`.
+when using `update_settings_bundle` if you are using Fastlane >= 2.64.0.
 
 ```ruby
 increment_build_number
