@@ -35,7 +35,7 @@ jobs:
       - run:
           name: run tests
           command: |
-            bundle exec rake
+            bundle exec fastlane tests
 
       # collect reports
       - store_test_results:
