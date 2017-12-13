@@ -1,0 +1,34 @@
+# General-purpose Fastfile.internal for plugin maintenance
+
+desc "Release plugin to RubyGems"
+lane :release do
+  rake task: :release
+end
+
+desc "Install plugin gem in $GEM_HOME"
+lane :install do |opts|
+  if opts[:local]
+    rake task: "install:local"
+  else
+    rake task: :install
+  end
+end
+
+desc "Run rspec and rubocop"
+lane :tests do
+  rake task: :default
+end
+
+desc "Rub rubocop"
+lane :run_rubocop do |opts|
+  if opts[:correct]
+    rake task: "rubocop:auto_correct"
+  else
+    rake task: :rubocop
+  end
+end
+
+desc "Update rubocop"
+lane :rubocop_update do
+  update_rubocop
+end
