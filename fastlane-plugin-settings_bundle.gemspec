@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'xcodeproj', '>= 1.4.0'
 
   spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'fastlane', '>= 2.64.0'
+  spec.add_development_dependency 'fastlane', '>= 2.69.0'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
