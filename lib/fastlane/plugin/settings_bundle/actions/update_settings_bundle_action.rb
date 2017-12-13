@@ -45,7 +45,7 @@ module Fastlane
         # raises
         helper.update_settings_plist_title_setting project, params[:bundle_name], file, key,
                                                    formatted_value
-      rescue => e
+      rescue StandardError => e
         UI.user_error! "#{e.message}\n#{e.backtrace}"
       end
 

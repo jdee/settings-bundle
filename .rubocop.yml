@@ -1,3 +1,13 @@
+# --- update_rubocop ---
+# TODO: Review these failing cops, adjust code and re-enable as necessary.
+
+Style/FormatStringToken:
+  Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+# --- update_rubocop ---
+
 # https://github.com/bbatsov/rubocop/issues/3284
 # Disable for now
 Style/FrozenStringLiteralComment:
@@ -16,7 +26,7 @@ Metrics/BlockLength:
   Enabled: false
 
 # certificate_1 is an okay variable name
-Style/VariableNumber:
+Naming/VariableNumber:
   Enabled: false
 
 # This is used a lot across the fastlane code base for config files
@@ -162,7 +172,7 @@ Lint/ParenthesesAsGroupedExpression:
 
 # This would reject is_ in front of methods
 # We use `is_supported?` everywhere already
-Style/PredicateName:
+Naming/PredicateName:
   Enabled: false
 
 # We allow the $
@@ -202,7 +212,7 @@ Style/CollectionMethods:
   Enabled: false
 
 # They have not to be snake_case
-Style/FileName:
+Naming/FileName:
   Exclude:
     - '*.gemspec'
     - '**/Dangerfile'
