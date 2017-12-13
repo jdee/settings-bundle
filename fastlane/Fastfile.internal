@@ -19,7 +19,7 @@ lane :tests do
   rake task: :default
 end
 
-desc "Rub rubocop"
+desc "Run rubocop"
 lane :run_rubocop do |opts|
   if opts[:correct]
     rake task: "rubocop:auto_correct"
