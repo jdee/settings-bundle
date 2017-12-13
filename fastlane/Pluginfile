@@ -1,1 +1,1 @@
-gem "fastlane-plugin-maintenance", path: "../fastlane-plugin-maintenance"
+gem "fastlane-plugin-maintenance"
