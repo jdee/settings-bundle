@@ -139,8 +139,8 @@ module Fastlane
           repo_path = Bundler.root
 
           all_xcodeproj_paths = Dir[File.expand_path(File.join(repo_path, '**/*.xcodeproj'))]
-          # find an xcodeproj (ignoring the Cocoapods one)
-          xcodeproj_paths = Fastlane::Actions.ignore_cocoapods_path(all_xcodeproj_paths)
+          # find an xcodeproj (ignoring dependencies)
+          xcodeproj_paths = Fastlane::Helper::XcodeprojHelper.find(all_xcodeproj_paths)
 
           # no projects found: error
           UI.user_error!('Could not find a .xcodeproj in the current repository\'s working directory.') and return nil if xcodeproj_paths.count == 0

@@ -417,23 +417,23 @@ describe Fastlane::Helper::SettingsBundleHelper do
     end
 
     it 'returns the path if one project present' do
-      expect(Dir).to receive(:[]) { ["#{root}/MyProject.xcodeproj"] }
+      expect(Dir).to receive(:[]) { ["#{root}/MyProject.xcodeproj"] }.twice
       expect(helper.xcodeproj_path_from_params({})).to eq "#{root}/MyProject.xcodeproj"
     end
 
     it 'ignores projects under Pods' do
-      expect(Dir).to receive(:[]) { ["#{root}/MyProject.xcodeproj", "#{root}/Pods/Pods.xcodeproj"] }
+      expect(Dir).to receive(:[]) { ["#{root}/MyProject.xcodeproj", "#{root}/Pods/Pods.xcodeproj"] }.twice
       expect(helper.xcodeproj_path_from_params({})).to eq "#{root}/MyProject.xcodeproj"
     end
 
     it 'returns nil and errors if no project found' do
-      expect(Dir).to receive(:[]) { [] }
+      expect(Dir).to receive(:[]) { [] }.twice
       expect(FastlaneCore::UI).to receive(:user_error!)
       expect(helper.xcodeproj_path_from_params({})).to be_nil
     end
 
     it 'returns the path if one project present' do
-      expect(Dir).to receive(:[]) { ["#{root}/MyProject.xcodeproj", "#{root}/OtherProject.xcodeproj"] }
+      expect(Dir).to receive(:[]) { ["#{root}/MyProject.xcodeproj", "#{root}/OtherProject.xcodeproj"] }.twice
       expect(FastlaneCore::UI).to receive(:user_error!)
       expect(helper.xcodeproj_path_from_params({})).to be_nil
     end
