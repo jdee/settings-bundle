@@ -1,18 +1,18 @@
-fastlane_version "2.69.0"
-
+min_fastlane_version "2.69.0"
 default_platform :ios
+import_actionspace(:settings_bundle, as: :sb)
 
 desc "Test lane to update SettingsBundleExample"
 lane :test do
   xcodeproj = "examples/SettingsBundleExample/SettingsBundleExample.xcodeproj"
 
   increment_build_number xcodeproj: xcodeproj
-  update_settings_bundle xcodeproj: xcodeproj,
-                         key: "CurrentAppVersion",
-                         value: ":version (:build)"
-  update_settings_bundle xcodeproj: xcodeproj,
-                         key: "BuildDate",
-                         value: Time.now.strftime("%B %-d, %Y")
+  sb.update xcodeproj: xcodeproj,
+                       key: "CurrentAppVersion",
+                       value: ":version (:build)"
+  sb.update xcodeproj: xcodeproj,
+                       key: "BuildDate",
+                       value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
   # commit_version_bump xcodeproj: xcodeproj
@@ -23,12 +23,12 @@ lane :group_test do
   xcodeproj = "examples/SettingsBundleGroupExample/SettingsBundleGroupExample.xcodeproj"
 
   increment_build_number xcodeproj: xcodeproj
-  update_settings_bundle xcodeproj: xcodeproj,
-                         key: "CurrentAppVersion",
-                         value: ":version (:build)"
-  update_settings_bundle xcodeproj: xcodeproj,
-                         key: "BuildDate",
-                         value: Time.now.strftime("%B %-d, %Y")
+  sb.update xcodeproj: xcodeproj,
+                       key: "CurrentAppVersion",
+                       value: ":version (:build)"
+  sb.update xcodeproj: xcodeproj,
+                       key: "BuildDate",
+                       value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
   # commit_version_bump xcodeproj: xcodeproj
@@ -41,15 +41,15 @@ lane :library_test do
   ENV["SETTINGS_BUNDLE_XCODEPROJ"] = xcodeproj
 
   increment_build_number xcodeproj: xcodeproj
-  update_settings_bundle target: "SettingsBundleLibraryExample",
-                         key: "CurrentAppVersion",
-                         value: ":version (:build)"
-  update_settings_bundle target: "SettingsBundleExampleFramework",
-                         key: "CurrentFrameworkVersion",
-                         value: ":version (:build)",
-                         file: "Framework.plist"
-  update_settings_bundle key: "BuildDate",
-                         value: Time.now.strftime("%B %-d, %Y")
+  sb.update target: "SettingsBundleLibraryExample",
+            key: "CurrentAppVersion",
+            value: ":version (:build)"
+  sb.update target: "SettingsBundleExampleFramework",
+            key: "CurrentFrameworkVersion",
+            value: ":version (:build)",
+            file: "Framework.plist"
+  sb.update key: "BuildDate",
+            value: Time.now.strftime("%B %-d, %Y")
 
   # Uncomment to commit these changes.
   # commit_version_bump xcodeproj: xcodeproj

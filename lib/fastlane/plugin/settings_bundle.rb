@@ -1,4 +1,5 @@
-require 'fastlane/plugin/settings_bundle/version'
+require_relative 'settings_bundle/version'
+require 'actionspace/import'
 
 module Fastlane
   module SettingsBundle
@@ -14,3 +15,5 @@ end
 Fastlane::SettingsBundle.all_classes.each do |current|
   require current
 end
+
+actionspace(:settings_bundle, update: :update_settings_bundle)
