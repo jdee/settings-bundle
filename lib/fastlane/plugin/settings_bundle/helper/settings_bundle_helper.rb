@@ -77,6 +77,10 @@ module Fastlane
           current_marketing_version = info_plist["CFBundleShortVersionString"]
           current_build_number = info_plist["CFBundleVersion"]
 
+          if current_marketing_version == "$(MARKETING_VERSION)"
+            current_marketing_version = expanded_build_setting target, "MARKETING_VERSION", configuration
+          end
+
           raise "CFBundleShortVersionString not found in Info.plist" if current_marketing_version.nil?
           raise "CFBundleVersion not found in Info.plist" if current_build_number.nil?
 
